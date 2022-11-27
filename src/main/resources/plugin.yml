@@ -1,0 +1,8 @@
+name: ContingencyContract
+version: '${project.version}'
+main: tempestissimo.club.contingencycontract.ContingencyContract
+api-version: 1.19
+prefix: CC
+authors: [ TempestZYTux ]
+description: ContingencyContract for Minecraft
+website: none

@@ -1,0 +1,36 @@
+Contract:
+  Erode:
+    visible: true
+    localized_name:
+      cn-zh: 侵蚀
+      en: Erode
+    localized_description:
+      cn-zh: 所有玩家的生命上限降低{}%
+    level0:
+      - 25.0
+      - 50.0
+      - 75.0
+  HighValueTarget:
+    visible: true
+    localized_name:
+      cn-zh: 高价值目标
+      en: High Value Target
+    localized_description:
+      cn-zh: 所有我方单位的攻击力降低{}%
+    level0:
+      - 15.0
+      - 30.0
+      - 50.0
+  Stimulation:
+    visible: true
+    localized_name:
+      cn-zh: 刺激
+      en: Stimulation
+    localized_description:
+      cn-zh: 所有敌人的攻击力提升{}%
+    level0:
+      - 20.0
+      - 40.0
+      - 80.0
+General:
+  Language: cn-zh
