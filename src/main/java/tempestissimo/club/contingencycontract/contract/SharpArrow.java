@@ -8,16 +8,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
-public class SharpEye extends Contract implements Listener {
-    public SharpEye(Configuration config, ContingencyContract plugin) {
-        super("SharpEye", config, plugin);
+public class SharpArrow extends Contract implements Listener {
+    public SharpArrow(Configuration config, ContingencyContract plugin) {
+        super("SharpArrow", config, plugin);
     }
 
     @EventHandler
     public void onShootArrow(EntityShootBowEvent e){
         Entity shooter = e.getEntity();
-        if (shooter.equals(EntityType.SKELETON) || shooter.getType().equals(EntityType.PILLAGER)){
-            e.getProjectile().setVelocity(e.getProjectile().getVelocity().);
+        if (this.selectedIndex<0)
+            return;
+        if (shooter.getType().equals(EntityType.SKELETON) || shooter.getType().equals(EntityType.PILLAGER)){
+            e.getProjectile().setVelocity(e.getProjectile().getVelocity().multiply(1+this.levelColumnZero.get(this.selectedIndex)/100));
         }
     }
 

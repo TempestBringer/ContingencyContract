@@ -1,36 +1,166 @@
 Contract:
-  Erode:
+  Burden:
     visible: true
     localized_name:
-      cn-zh: 侵蚀
-      en: Erode
+      cn_zh: 负重
+      en: Burden
     localized_description:
-      cn-zh: 所有玩家的生命上限降低{}%
+      cn_zh: 背包格数每占用可用格子数量的1%，降低移速<!>%
+    level0:
+      - 0.1
+      - 0.3
+      - 0.5
+  CovertOperation:
+    visible: true
+    localized_name:
+      cn_zh: 隐秘行动
+      en: Covert Operation
+    localized_description:
+      cn_zh: 背包格子数量减少<!>%
     level0:
       - 25.0
       - 50.0
       - 75.0
+  CreeperFusion:
+    visible: true
+    localized_name:
+      cn_zh: 聚变
+      en: Fusion
+    localized_description:
+      cn_zh: 所有Creeper的生命值提升<!>%,爆炸充能时间减少<!>%,爆炸范围提升<!>%
+    level0:
+      - 40.0
+      - 80.0
+      - 150.0
+    level1:
+      - 0.0
+      - 40.0
+      - 80.0
+    level2:
+      - 50.0
+      - 100.0
+      - 200.0
+  Erode:
+    visible: true
+    localized_name:
+      cn_zh: 侵蚀
+      en: Erode
+    localized_description:
+      cn_zh: 所有玩家的生命上限降低<!>%
+    level0:
+      - 25.0
+      - 50.0
+      - 75.0
+  FireObsessed:
+    visible: true
+    localized_name:
+      cn_zh: 火之骄子
+      en: Fire Obsessed
+    localized_description:
+      cn_zh: 所有玩家的燃烧时间延长<!>%
+    level0:
+      - 50.0
+      - 200.0
+      - 1000.0
+  FromEnd:
+    visible: true
+    localized_name:
+      cn_zh: 来自终末
+      en: From End
+    localized_description:
+      cn_zh: 末影人的生命提升<!>%
+    level0:
+      - 50.0
+      - 100.0
+      - 200.0
   HighValueTarget:
     visible: true
     localized_name:
-      cn-zh: 高价值目标
+      cn_zh: 高价值目标
       en: High Value Target
     localized_description:
-      cn-zh: 所有我方单位的攻击力降低{}%
+      cn_zh: 所有我方单位的攻击力降低<!>%
     level0:
       - 15.0
       - 30.0
       - 50.0
+  MechanicalDisaster:
+    visible: true
+    localized_name:
+      cn_zh: 机械之灾
+      en: MechanicalDisaster
+    localized_description:
+      cn_zh: 活塞响应<!>%的红石信号
+    level0:
+      - 0.0
+  ShareDamage:
+    visible: true
+    localized_name:
+      cn_zh: 血脉相连
+      en: MechanicalDisaster
+    localized_description:
+      cn_zh: 当有玩家受伤时，其他玩家受到该次伤害<!>%的生命流失
+    level0:
+      - 30.0
+      - 75.0
+      - 150.0
+  SharpArrow:
+    visible: true
+    localized_name:
+      cn_zh: 锐箭
+      en: Sharp Arrow
+    localized_description:
+      cn_zh: 来自骷髅和掠夺者的弓箭的速度提升<!>%
+    level0:
+      - 25.0
+      - 50.0
+      - 100.0
+  Silence:
+    visible: true
+    localized_name:
+      cn_zh: 大静谧
+      en: Silence
+    localized_description:
+      cn_zh: 只有<!>格内的玩家可以与你聊天
+    level0:
+      - 128.0
+      - 64.0
+      - 32.0
   Stimulation:
     visible: true
     localized_name:
-      cn-zh: 刺激
+      cn_zh: 刺激
       en: Stimulation
     localized_description:
-      cn-zh: 所有敌人的攻击力提升{}%
+      cn_zh: 所有敌人的攻击力提升<!>%
     level0:
       - 20.0
       - 40.0
       - 80.0
+  ThickMob:
+    visible: true
+    localized_name:
+      cn_zh: 活性
+      en: Thick Mob
+    localized_description:
+      cn_zh: 所有敌对生物的生命值提升<!>%
+    level0:
+      - 40.0
+      - 80.0
+      - 150.0
+Information:
+  ShouldSendMessageAsPlayer:
+    cn_zh: 必须以玩家身份使用该命令。
+  IndexOutOfBoundary:
+    cn_zh: 参数范围超限。
+  NotEnoughArguments:
+    cn_zh: 命令参数不足。
+  TooManyArguments:
+    cn_zh: 命令参数过多。
+  ChangingAnInvisibleContract:
+    cn_zh: 更改一个不可见的合约。
+  WrongArgumentType:
+    cn_zh: 错误的参数类型。
+
 General:
-  Language: cn-zh
+  Language: cn_zh

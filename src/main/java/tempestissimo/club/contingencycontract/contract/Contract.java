@@ -1,6 +1,7 @@
 package tempestissimo.club.contingencycontract.contract;
 
 import org.bukkit.configuration.Configuration;
+import org.bukkit.event.Listener;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Contract's prototype. Extend this class to further customize contracts.
  */
-public class Contract {
+public abstract class Contract implements Listener {
     /**
      * Should player see this contract or not.
      */
@@ -28,7 +29,11 @@ public class Contract {
     public ArrayList<Double> levelColumnThree;
     public ArrayList<Double> levelColumnFour;
     /**
-     * This Contract's name.
+     * Internal name, in English.
+     */
+    public String iname;
+    /**
+     * This Contract's name. Translated to "localized" text.
      */
     public String name;
     /**
@@ -41,6 +46,7 @@ public class Contract {
     public ContingencyContract plugin;
 
     public Contract(String name, Configuration config, ContingencyContract plugin) {
+        this.iname = name;
         this.visible = config.getBoolean("Contract.".concat(name).concat(".visible"));
         this.selectedIndex = -1;
         if (config.contains("Contract.".concat(name).concat(".level0"))){
@@ -73,7 +79,6 @@ public class Contract {
         this.plugin = plugin;
     }
 
-    public void onStart(){
-
-    }
+    public abstract void start();
+    public abstract void stop();
 }

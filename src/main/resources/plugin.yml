@@ -6,3 +6,8 @@ prefix: CC
 authors: [ TempestZYTux ]
 description: ContingencyContract for Minecraft
 website: none
+commands:
+  cc:
+    description: "Contingency Contract"
+    usage: /cc
+    aliases: []
