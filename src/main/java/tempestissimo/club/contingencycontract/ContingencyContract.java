@@ -49,6 +49,15 @@ public final class ContingencyContract extends JavaPlugin {
         contracts.add(new CovertOperation(config,plugin));
         contracts.add(new ThickMob(config,plugin));
         contracts.add(new Burden(config,plugin));
+        contracts.add(new FromEnd(config,plugin));
+        contracts.add(new LongLifeArmy(config,plugin));
+        contracts.add(new BurnOut(config,plugin));
+        contracts.add(new PoorTools(config,plugin));
+        contracts.add(new HeavyShield(config,plugin));
+        contracts.add(new Eutrophic(config,plugin));
+        contracts.add(new Bubble(config,plugin));
+        contracts.add(new MineralPaucity(config,plugin));
+//        contracts.add(new Spin(config,plugin));
         getServer().getPluginManager().registerEvents(contracts.get(0),this);
         getServer().getPluginManager().registerEvents(contracts.get(1),this);
         getServer().getPluginManager().registerEvents(contracts.get(2),this);
@@ -61,6 +70,14 @@ public final class ContingencyContract extends JavaPlugin {
         getServer().getPluginManager().registerEvents(contracts.get(9),this);
         getServer().getPluginManager().registerEvents(contracts.get(10),this);
         getServer().getPluginManager().registerEvents(contracts.get(11),this);
+        getServer().getPluginManager().registerEvents(contracts.get(12),this);
+        getServer().getPluginManager().registerEvents(contracts.get(13),this);
+        getServer().getPluginManager().registerEvents(contracts.get(14),this);
+        getServer().getPluginManager().registerEvents(contracts.get(15),this);
+        getServer().getPluginManager().registerEvents(contracts.get(16),this);
+        getServer().getPluginManager().registerEvents(contracts.get(17),this);
+        getServer().getPluginManager().registerEvents(contracts.get(18),this);
+        getServer().getPluginManager().registerEvents(contracts.get(19),this);
     }
 
 }

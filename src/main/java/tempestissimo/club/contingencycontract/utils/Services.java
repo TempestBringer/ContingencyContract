@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 import tempestissimo.club.contingencycontract.contract.Contract;
 
@@ -210,6 +211,23 @@ public class Services {
         TextComponent component = new TextComponent(text);
         component.setColor(color);
         return component;
+    }
+
+
+    /**
+     * Tell player when picked up an outdated item.
+     * @param player
+     */
+    public void pickupAPastBubble(Player player, ItemStack itemStack,Integer second){
+        ArrayList<TextComponent> results = pluginNamePrefix();
+        results.add(getTextComponent("你捡起了",ChatColor.WHITE));
+        results.add(getTextComponent(String.valueOf(itemStack.getAmount()),ChatColor.RED));
+        results.add(getTextComponent("个",ChatColor.WHITE));
+        results.add(getTextComponent(itemStack.getType().name(),ChatColor.RED));
+        results.add(getTextComponent("的泡影，该物品在",ChatColor.WHITE));
+        results.add(getTextComponent(String.valueOf(second),ChatColor.RED));
+        results.add(getTextComponent("秒之前已经消失",ChatColor.WHITE));
+        player.spigot().sendMessage(results.toArray(new TextComponent[results.size()]));
     }
 
     /**

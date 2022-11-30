@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
 public class FromEnd extends Contract implements Listener {
@@ -24,8 +25,19 @@ public class FromEnd extends Contract implements Listener {
             enderman.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(enderman.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*(1+this.levelColumnZero.get(this.selectedIndex)/100));
             enderman.setHealth(enderman.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
             enderman.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(enderman.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100));
+            enderman.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.levelColumnTwo.get(this.selectedIndex));
         }
     }
+//    @EventHandler
+//    public void onEnderManSufferFromWater(EntityDamageEvent e){
+//        if(!e.getEntity().getType().equals(EntityType.ENDERMAN)){
+//            return;
+//        }
+//        Enderman enderman = (Enderman)e.getEntity();
+//        if (e.getCause().equals(EntityDamageEvent.DamageCause.CONTACT)){
+//            e.setCancelled(true);
+//        }
+//    }
 
     @Override
     public void start() {

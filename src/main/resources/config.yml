@@ -1,4 +1,15 @@
 Contract:
+  Bubble:
+    visible: true
+    localized_name:
+      cn_zh: 泡影
+      en: Bubble
+    localized_description:
+      cn_zh: 掉落物消失时间减少<!>%
+    level0:
+      - 30.0
+      - 60.0
+      - 90.0
   Burden:
     visible: true
     localized_name:
@@ -10,6 +21,25 @@ Contract:
       - 0.1
       - 0.3
       - 0.5
+  BurnOut:
+    visible: true
+    localized_name:
+      cn_zh: 烈焰焚尽
+      en: Burden
+    localized_description:
+      cn_zh: 烈焰人生命值提升<!>%，攻击力提升<!>%，自带<!>点护甲
+    level0:
+      - 30.0
+      - 60.0
+      - 120.0
+    level1:
+      - 20.0
+      - 40.0
+      - 80.0
+    level2:
+      - 3.0
+      - 6.0
+      - 10.0
   CovertOperation:
     visible: true
     localized_name:
@@ -51,6 +81,17 @@ Contract:
       - 25.0
       - 50.0
       - 75.0
+  Eutrophic:
+    visible: true
+    localized_name:
+      cn_zh: 富营养
+      en: Erode
+    localized_description:
+      cn_zh: 水生生物有<!>%概率变为守卫者，3级词条升级为远古守卫者
+    level0:
+      - 25.0
+      - 50.0
+      - 50.0
   FireObsessed:
     visible: true
     localized_name:
@@ -68,11 +109,28 @@ Contract:
       cn_zh: 来自终末
       en: From End
     localized_description:
-      cn_zh: 末影人的生命提升<!>%
+      cn_zh: 末影人的生命提升<!>%，攻击力提升<!>%，自带<!>点护甲
     level0:
       - 50.0
       - 100.0
       - 200.0
+    level1:
+      - 20.0
+      - 40.0
+      - 60.0
+    level2:
+      - 4.0
+      - 8.0
+      - 12.0
+  HeavyShield:
+    visible: true
+    localized_name:
+      cn_zh: 重盾
+      en: High Value Target
+    localized_description:
+      cn_zh: 以盾牌阻挡潜在伤害后冷却<!>秒
+    level0:
+      - 5.0
   HighValueTarget:
     visible: true
     localized_name:
@@ -84,6 +142,21 @@ Contract:
       - 15.0
       - 30.0
       - 50.0
+  LongLifeArmy:
+    visible: true
+    localized_name:
+      cn_zh: 长生军
+      en: Long Life Army
+    localized_description:
+      cn_zh: 僵尸的生命提升<!>%，生成时额外生成<!>只僵尸
+    level0:
+      - 30.0
+      - 60.0
+      - 100.0
+    level1:
+      - 2
+      - 4
+      - 6
   MechanicalDisaster:
     visible: true
     localized_name:
@@ -93,6 +166,27 @@ Contract:
       cn_zh: 活塞响应<!>%的红石信号
     level0:
       - 0.0
+  MineralPaucity:
+    visible: true
+    localized_name:
+      cn_zh: 矿物贫乏
+      en: Mineral Paucity
+    localized_description:
+      cn_zh: 矿物挖掘后有<!>%概率无掉落物
+    level0:
+      - 30.0
+      - 75.0
+  PoorTools:
+    visible: true
+    localized_name:
+      cn_zh: 劣质工具
+      en: PoorTools
+    localized_description:
+      cn_zh: 工具损坏加快<!>%
+    level0:
+      - 100.0
+      - 200.0
+      - 300.0
   ShareDamage:
     visible: true
     localized_name:
@@ -126,6 +220,17 @@ Contract:
       - 128.0
       - 64.0
       - 32.0
+  Spin:
+    visible: true
+    localized_name:
+      cn_zh: 自旋
+      en: Spin
+    localized_description:
+      cn_zh: 你的视角每刻旋转<!>度
+    level0:
+      - 0.05
+      - 10
+      - 20
   Stimulation:
     visible: true
     localized_name:

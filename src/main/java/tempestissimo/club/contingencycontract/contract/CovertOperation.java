@@ -5,13 +5,17 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import tempestissimo.club.contingencycontract.ContingencyContract;
+
+import java.util.List;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -22,6 +26,9 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onClickInventory(InventoryClickEvent e){
+        if (this.selectedIndex<0){
+            return;
+        }
         if (e.getCurrentItem()==null){
             return;
         }
@@ -35,8 +42,12 @@ public class CovertOperation extends Contract implements Listener {
         }
     }
 
+
     @EventHandler
     public void onInventoryEvent(InventoryMoveItemEvent e){
+        if (this.selectedIndex<0){
+            return;
+        }
         if (e.getItem().getType().equals(Material.BARRIER)){
             e.setCancelled(true);
         }
@@ -44,8 +55,24 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e){
+        if (this.selectedIndex<0){
+            return;
+        }
         if (e.getItemDrop().getItemStack().getType().equals(Material.BARRIER)){
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent e){
+        if (this.selectedIndex<0){
+            return;
+        }
+        Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
+        Player player = e.getPlayer();
+        PlayerInventory inventory = player.getInventory();
+        for (int i = (int) (36*(1-ratio)); i < 36; i++) {
+            inventory.setItem(i,new ItemStack(Material.BARRIER));
         }
     }
 
