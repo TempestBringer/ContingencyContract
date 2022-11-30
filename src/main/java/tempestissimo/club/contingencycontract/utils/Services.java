@@ -220,7 +220,7 @@ public class Services {
      */
     public void pickupAPastBubble(Player player, ItemStack itemStack,Integer second){
         ArrayList<TextComponent> results = pluginNamePrefix();
-        String[] text = config.getString("Information.ChangingAnInvisibleContract.".concat(config.getString("General.Language"))).split("/");
+        String[] text = config.getString("Information.PickUpABubble.".concat(config.getString("General.Language"))).split("/");
         results.add(getTextComponent(text[0],ChatColor.WHITE));
         results.add(getTextComponent(String.valueOf(itemStack.getAmount()),ChatColor.RED));
         results.add(getTextComponent(text[1],ChatColor.WHITE));
