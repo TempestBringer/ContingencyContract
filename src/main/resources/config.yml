@@ -6,6 +6,7 @@ Contract:
       en: Bubble
     localized_description:
       cn_zh: 掉落物消失时间减少<!>%
+      en: Item on the ground survive time -<!>%
     level0:
       - 30.0
       - 60.0
@@ -17,6 +18,7 @@ Contract:
       en: Burden
     localized_description:
       cn_zh: 背包格数每占用可用格子数量的1%，降低移速<!>%
+      en: Every 1% occupied slot in available slots slow down your move speed by <!>%
     level0:
       - 0.1
       - 0.3
@@ -28,6 +30,7 @@ Contract:
       en: Burden
     localized_description:
       cn_zh: 烈焰人生命值提升<!>%，攻击力提升<!>%，自带<!>点护甲
+      en: Blaze max health +<!>%, atk +<!>%, has <!> shield point
     level0:
       - 30.0
       - 60.0
@@ -47,6 +50,7 @@ Contract:
       en: Covert Operation
     localized_description:
       cn_zh: 背包格子数量减少<!>%
+      en: Available inventory slot -<!>%
     level0:
       - 25.0
       - 50.0
@@ -58,6 +62,7 @@ Contract:
       en: Fusion
     localized_description:
       cn_zh: 所有Creeper的生命值提升<!>%,爆炸充能时间减少<!>%,爆炸范围提升<!>%
+      en: Creeper max health +<!>%,charge time -<!>%,explode radius +<!>%
     level0:
       - 40.0
       - 80.0
@@ -77,6 +82,7 @@ Contract:
       en: Erode
     localized_description:
       cn_zh: 所有玩家的生命上限降低<!>%
+      en: Player's max health decrease <!>%
     level0:
       - 25.0
       - 50.0
@@ -88,6 +94,7 @@ Contract:
       en: Erode
     localized_description:
       cn_zh: 水生生物有<!>%概率变为守卫者，3级词条升级为远古守卫者
+      en: Water life <!>% chance turned into guardian, level 3 upgraded to elder guardian
     level0:
       - 25.0
       - 50.0
@@ -99,6 +106,7 @@ Contract:
       en: Fire Obsessed
     localized_description:
       cn_zh: 所有玩家的燃烧时间延长<!>%
+      en: Player's burn time extend <!>%
     level0:
       - 50.0
       - 200.0
@@ -110,6 +118,7 @@ Contract:
       en: From End
     localized_description:
       cn_zh: 末影人的生命提升<!>%，攻击力提升<!>%，自带<!>点护甲
+      en: Enderman max health +<!>%, atk +<!>%, has <!> shield point
     level0:
       - 50.0
       - 100.0
@@ -129,6 +138,7 @@ Contract:
       en: High Value Target
     localized_description:
       cn_zh: 以盾牌阻挡潜在伤害后冷却<!>秒
+      en: Shield cool down <!>s after void damage
     level0:
       - 5.0
   HighValueTarget:
@@ -138,6 +148,7 @@ Contract:
       en: High Value Target
     localized_description:
       cn_zh: 所有我方单位的攻击力降低<!>%
+      en: Friendly Unit atk -<!>%
     level0:
       - 15.0
       - 30.0
@@ -149,6 +160,7 @@ Contract:
       en: Long Life Army
     localized_description:
       cn_zh: 僵尸的生命提升<!>%，生成时额外生成<!>只僵尸
+      en: Zombie's max health +<!>%, spawn <!> more zombies
     level0:
       - 30.0
       - 60.0
@@ -164,6 +176,7 @@ Contract:
       en: MechanicalDisaster
     localized_description:
       cn_zh: 活塞响应<!>%的红石信号
+      en: Pistons no longer respond to redstone signal
     level0:
       - 0.0
   MineralPaucity:
@@ -173,16 +186,18 @@ Contract:
       en: Mineral Paucity
     localized_description:
       cn_zh: 矿物挖掘后有<!>%概率无掉落物
+      en: <!>% chance get nothing after mine a mineral
     level0:
       - 30.0
       - 75.0
   PoorTools:
     visible: true
     localized_name:
-      cn_zh: 劣质工具
+      cn_zh: 拙劣
       en: PoorTools
     localized_description:
-      cn_zh: 工具损坏加快<!>%
+      cn_zh: 工具/装备损坏加快<!>%
+      en: Tools/Equipments damage +<!>%
     level0:
       - 100.0
       - 200.0
@@ -194,6 +209,7 @@ Contract:
       en: MechanicalDisaster
     localized_description:
       cn_zh: 当有玩家受伤时，其他玩家受到该次伤害<!>%的生命流失
+      en: When a player damaged, other players loss <!>% life of this damage
     level0:
       - 30.0
       - 75.0
@@ -205,6 +221,7 @@ Contract:
       en: Sharp Arrow
     localized_description:
       cn_zh: 来自骷髅和掠夺者的弓箭的速度提升<!>%
+      en: Enemy's arrow speed up <!>%
     level0:
       - 25.0
       - 50.0
@@ -216,6 +233,7 @@ Contract:
       en: Silence
     localized_description:
       cn_zh: 只有<!>格内的玩家可以与你聊天
+      en: Only players with in <!> blocks can chat with you
     level0:
       - 128.0
       - 64.0
@@ -238,6 +256,7 @@ Contract:
       en: Stimulation
     localized_description:
       cn_zh: 所有敌人的攻击力提升<!>%
+      en: All enemy's atk +<!>%
     level0:
       - 20.0
       - 40.0
@@ -249,6 +268,7 @@ Contract:
       en: Thick Mob
     localized_description:
       cn_zh: 所有敌对生物的生命值提升<!>%
+      en: All enemy's max health +<!>%
     level0:
       - 40.0
       - 80.0
@@ -256,16 +276,25 @@ Contract:
 Information:
   ShouldSendMessageAsPlayer:
     cn_zh: 必须以玩家身份使用该命令。
+    en: Must send command as player.
   IndexOutOfBoundary:
     cn_zh: 参数范围超限。
+    en: Argument out of range.
   NotEnoughArguments:
     cn_zh: 命令参数不足。
+    en: Not enough arguments.
   TooManyArguments:
     cn_zh: 命令参数过多。
+    en: Too many arguments.
   ChangingAnInvisibleContract:
     cn_zh: 更改一个不可见的合约。
+    en: You are not HarryPotter.
   WrongArgumentType:
     cn_zh: 错误的参数类型。
+    en: Wrong argument type.
+  PickUpABubble:
+    cn_zh: 你捡起了/个/的泡影，该物品在/秒之前已经消失
+    en: You picked up / bubbles of /, disappeared / seconds ago
 
 General:
   Language: cn_zh

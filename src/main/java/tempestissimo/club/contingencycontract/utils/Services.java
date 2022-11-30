@@ -220,13 +220,14 @@ public class Services {
      */
     public void pickupAPastBubble(Player player, ItemStack itemStack,Integer second){
         ArrayList<TextComponent> results = pluginNamePrefix();
-        results.add(getTextComponent("你捡起了",ChatColor.WHITE));
+        String[] text = config.getString("Information.ChangingAnInvisibleContract.".concat(config.getString("General.Language"))).split("/");
+        results.add(getTextComponent(text[0],ChatColor.WHITE));
         results.add(getTextComponent(String.valueOf(itemStack.getAmount()),ChatColor.RED));
-        results.add(getTextComponent("个",ChatColor.WHITE));
+        results.add(getTextComponent(text[1],ChatColor.WHITE));
         results.add(getTextComponent(itemStack.getType().name(),ChatColor.RED));
-        results.add(getTextComponent("的泡影，该物品在",ChatColor.WHITE));
+        results.add(getTextComponent(text[2],ChatColor.WHITE));
         results.add(getTextComponent(String.valueOf(second),ChatColor.RED));
-        results.add(getTextComponent("秒之前已经消失",ChatColor.WHITE));
+        results.add(getTextComponent(text[3],ChatColor.WHITE));
         player.spigot().sendMessage(results.toArray(new TextComponent[results.size()]));
     }
 
