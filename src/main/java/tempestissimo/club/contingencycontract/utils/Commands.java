@@ -26,7 +26,8 @@ public class Commands implements CommandExecutor, TabCompleter {
             }
             Player player = (Player) sender;
             if (args.length==0){
-                // only /cc
+                plugin.service.sendPluginIntroduction(player);
+                plugin.service.sendCommandIntroduction(player);
             }else{ // args[0] exist
                 if (args[0].equalsIgnoreCase("select")){
                     if (args.length<3){
@@ -40,7 +41,6 @@ public class Commands implements CommandExecutor, TabCompleter {
                             Integer contractIndex = Integer.valueOf(args[1]);
                             Integer level = Integer.valueOf(args[2]);
                             plugin.service.changeContracts(player,contractIndex,level);
-                            plugin.service.sendContracts(player);
                             return true;
                         }else{
                             plugin.service.wrongArgumentType(player);
@@ -51,12 +51,16 @@ public class Commands implements CommandExecutor, TabCompleter {
                     plugin.service.sendContracts(player);
                     return true;
                 }else if (args[0].equalsIgnoreCase("help")){
-
+                    plugin.service.sendPluginIntroduction(player);
+                    plugin.service.sendCommandIntroduction(player);
                 }else if (args[0].equalsIgnoreCase("start")){
-                    plugin.ctrl.startGame();
+                    plugin.ctrl.startGame(player);
                     return true;
                 }else if (args[0].equalsIgnoreCase("stop")){
-                    plugin.ctrl.stopGame();
+                    plugin.ctrl.stopGame(player);
+                    return true;
+                }else if (args[0].equalsIgnoreCase("reset")){
+                    plugin.ctrl.resetGame(player);
                     return true;
                 }
 
@@ -72,9 +76,12 @@ public class Commands implements CommandExecutor, TabCompleter {
         results.add("stop");
         results.add("list");
         results.add("help");
+        results.add("reset");
         return results;
 
     }
+
+
 
 
 

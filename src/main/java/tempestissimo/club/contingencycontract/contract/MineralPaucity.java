@@ -33,7 +33,8 @@ public class MineralPaucity extends Contract implements Listener {
                     type.equals(Material.LAPIS_ORE)||type.equals(Material.DEEPSLATE_LAPIS_ORE)||
                     type.equals(Material.DIAMOND_ORE)||type.equals(Material.DEEPSLATE_DIAMOND_ORE)||
                     type.equals(Material.NETHER_GOLD_ORE)||type.equals(Material.NETHER_QUARTZ_ORE)||
-                    type.equals(Material.ANCIENT_DEBRIS)){
+                    type.equals(Material.ANCIENT_DEBRIS)||type.equals(Material.RAW_COPPER_BLOCK)||
+                    type.equals(Material.RAW_GOLD_BLOCK)||type.equals(Material.RAW_IRON_BLOCK)){
                 e.setDropItems(false);
             }
         }

@@ -53,13 +53,7 @@ public class Services {
             changingAnInvisibleContract(player);
             return;
         }
-        if (plugin.contracts.get(contractIndex).selectedIndex==level){
-            plugin.contracts.get(contractIndex).selectedIndex = -1;
-            broadcastContractCancel(player,contractIndex,level);
-        }else{
-            plugin.contracts.get(contractIndex).selectedIndex = level;
-            broadcastContractSelect(player,contractIndex,level);
-        }
+        plugin.ctrl.changeContract(player, contractIndex, level);
     }
 
     public void broadcastContractCancel(Player player, Integer contractIndex, Integer level){
@@ -93,6 +87,92 @@ public class Services {
         for(Player tell:getServer().getOnlinePlayers()){
             tell.spigot().sendMessage(textComponents.toArray(new TextComponent[textComponents.size()]));
             sendTotalContractLevel(tell);
+        }
+    }
+
+    public void gameIsRunning(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.GameIsRunning.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    public void gameWaitReset(){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.GameWaitReset.".concat(config.getString("General.Language"))),ChatColor.GREEN));
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+    public void contractLocked(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.ContractLocked.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+
+    public void broadcastGameStart(Player starter){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.GameStart.".concat(config.getString("General.Language"))),ChatColor.GREEN));
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+    public void gameHadStarted(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.GameHadStarted.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    public void gameHadStopped(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.gameHadStopped.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    public void broadcastGameStop(){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.GameStop.".concat(config.getString("General.Language"))),ChatColor.GREEN));
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+
+
+    /**
+     * Send Message When Player Need Command Help
+     * @param player
+     */
+    public void sendPluginIntroduction(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        result = new ArrayList<>();
+        result.add(getTextComponent("  - 简介 一款模仿“危机合约”玩法设计的插件，玩家可自选tag来增加游戏难度",ChatColor.WHITE));
+        result.add(getTextComponent("  - 使用 /cc list选择词条后 /cc start以开始游戏 /cc stop以停止游戏",ChatColor.WHITE));
+        result.add(getTextComponent("  - 人数 不限",ChatColor.WHITE));
+        result.add(getTextComponent("  - 开发 TempestZYTux",ChatColor.WHITE));
+        for (TextComponent text : result){
+            player.spigot().sendMessage(text);
+        }
+    }
+    /**
+     * Send Message When Player Need Command Help
+     * @param player
+     */
+    public void sendCommandIntroduction(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        result = new ArrayList<>();
+        result.add(getTextComponent("  - /cc            插件介绍",ChatColor.WHITE));
+        result.add(getTextComponent("  - /cc help       同上",ChatColor.WHITE));
+        result.add(getTextComponent("  - /cc list       可用tag列表，使用鼠标点选以及查看详情",ChatColor.WHITE));
+        result.add(getTextComponent("  - /cc start      开始一局游戏，选择tag后需要开始游戏才能应用",ChatColor.WHITE));
+        result.add(getTextComponent("  - /cc stop       停止一局游戏",ChatColor.WHITE));
+        result.add(getTextComponent("  - /cc reset      重置游戏",ChatColor.WHITE));
+        for (TextComponent text : result){
+            player.spigot().sendMessage(text);
         }
     }
 

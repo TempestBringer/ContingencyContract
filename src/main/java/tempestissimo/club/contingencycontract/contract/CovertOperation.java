@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -69,6 +70,24 @@ public class CovertOperation extends Contract implements Listener {
         }
         if (e.getItemDrop().getItemStack().getType().equals(Material.BARRIER)){
             e.setCancelled(true);
+        }
+    }
+
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
+        if (this.selectedIndex<0){
+            return;
+        }
+        Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
+        for (Player player:getServer().getOnlinePlayers()){
+            PlayerInventory inventory = player.getInventory();
+            for (int i = (int) (36*(1-ratio)); i < 36; i++) {
+                inventory.setItem(i,new ItemStack(Material.BARRIER));
+            }
         }
     }
 

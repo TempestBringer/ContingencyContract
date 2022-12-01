@@ -6,6 +6,7 @@ import tempestissimo.club.contingencycontract.contract.*;
 import tempestissimo.club.contingencycontract.utils.Commands;
 import tempestissimo.club.contingencycontract.utils.GameCtrl;
 import tempestissimo.club.contingencycontract.utils.Services;
+import tempestissimo.club.contingencycontract.utils.Stats;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public final class ContingencyContract extends JavaPlugin {
     public ArrayList<Contract> contracts = new ArrayList<>();
     public Services service;
     public GameCtrl ctrl;
+    public Stats stats;
 
     @Override
     public void onEnable() {
@@ -23,6 +25,8 @@ public final class ContingencyContract extends JavaPlugin {
         this.saveDefaultConfig();
         this.config = this.getConfig();
         this.ctrl = new GameCtrl(plugin,config);
+        this.stats = new Stats(plugin, config, getServer().getScoreboardManager());
+        getServer().getPluginManager().registerEvents(this.ctrl,this);
         //
         this.loadContracts();
         getServer().getPluginCommand("cc").setExecutor(new Commands(this.plugin,this.config));

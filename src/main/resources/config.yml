@@ -127,7 +127,9 @@ Contract:
       - 1
       - 2
       - 3
+      - 4
     level0:
+      - 30.0
       - 50.0
       - 70.0
       - 90.0
@@ -269,7 +271,7 @@ Contract:
       cn_zh: 活塞不再响应红石信号
       en: Pistons no longer respond to redstone signal
     levelclass:
-      - 2
+      - 1
     level0:
       - 0.0
   MineralPaucity:
@@ -326,7 +328,7 @@ Contract:
       - 1
       - 2
     level0:
-      - 150.0
+      - 100.0
       - 300.0
   ShareDamage:
     visible: true
@@ -340,8 +342,8 @@ Contract:
       - 1
       - 2
     level0:
-      - 40.0
-      - 90.0
+      - 30.0
+      - 60.0
   SharpArrow:
     visible: true
     localized_name:
@@ -429,6 +431,27 @@ Contract:
       - 48.0
       - 96.0
 Information:
+  GameStart:
+    cn_zh: 游戏开始
+    en: GameStart
+  GameHadStarted:
+    cn_zh: 游戏已经开始了
+    en: GameHadStarted
+  GameStop:
+    cn_zh: 游戏结束
+    en: GameFinished
+  gameHadStopped:
+    cn_zh: 游戏未在进行
+    en: GameIsAlreadyOff
+  GameIsRunning:
+    cn_zh: 游戏正在进行
+    en: GameIsRunning
+  GameWaitReset:
+    cn_zh: 游戏准备重置
+    en: GameIsWaitingForReset
+  ContractLocked:
+    cn_zh: 合约已锁定
+    en: ContractLocked
   ShouldSendMessageAsPlayer:
     cn_zh: 必须以玩家身份使用该命令。
     en: Must send command as player.
@@ -452,6 +475,10 @@ Information:
     en: You picked up / bubbles of /, disappeared / seconds ago
   TotalContractLevel:
     cn_zh: 总合约等级
-    eb: Total Contract Level
+    en: Total Contract Level
+Status:
+  Name:
+    cn_zh: 数据
+    en: Stats
 General:
   Language: cn_zh
