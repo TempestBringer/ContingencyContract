@@ -16,16 +16,15 @@ public class HeavyShield extends Contract implements Listener {
 
     @EventHandler
     public void onUseShield(PlayerItemDamageEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }
         if (e.getItem().getType().equals(Material.SHIELD)){
             Player player = e.getPlayer();
             player.setCooldown(Material.SHIELD, (int) (this.levelColumnZero.get(this.selectedIndex)*20));
-            ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-            ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-            player.getInventory().setItemInMainHand(itemInOffHand);
-            player.getInventory().setItemInOffHand(itemInMainHand);
         }
     }
 

@@ -19,6 +19,9 @@ public class Silence extends Contract implements Listener {
 
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0)
             return;
         e.setCancelled(true);

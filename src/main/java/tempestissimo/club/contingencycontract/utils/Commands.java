@@ -53,10 +53,10 @@ public class Commands implements CommandExecutor, TabCompleter {
                 }else if (args[0].equalsIgnoreCase("help")){
 
                 }else if (args[0].equalsIgnoreCase("start")){
-                    plugin.service.startContracts();
+                    plugin.ctrl.startGame();
                     return true;
                 }else if (args[0].equalsIgnoreCase("stop")){
-                    plugin.service.stopContracts();
+                    plugin.ctrl.stopGame();
                     return true;
                 }
 

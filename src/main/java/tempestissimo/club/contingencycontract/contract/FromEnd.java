@@ -18,6 +18,9 @@ public class FromEnd extends Contract implements Listener {
 
     @EventHandler
     public void onEnderManSpawn(CreatureSpawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0)
             return;
         if(e.getEntity().getType().equals(EntityType.ENDERMAN)){
@@ -28,16 +31,6 @@ public class FromEnd extends Contract implements Listener {
             enderman.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.levelColumnTwo.get(this.selectedIndex));
         }
     }
-//    @EventHandler
-//    public void onEnderManSufferFromWater(EntityDamageEvent e){
-//        if(!e.getEntity().getType().equals(EntityType.ENDERMAN)){
-//            return;
-//        }
-//        Enderman enderman = (Enderman)e.getEntity();
-//        if (e.getCause().equals(EntityDamageEvent.DamageCause.CONTACT)){
-//            e.setCancelled(true);
-//        }
-//    }
 
     @Override
     public void start() {

@@ -17,6 +17,9 @@ public class LongLifeArmy extends Contract implements Listener {
 
     @EventHandler
     public void onZombieSpawn(CreatureSpawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0)
             return;
         if(e.getEntity().getType().equals(EntityType.ZOMBIE)){

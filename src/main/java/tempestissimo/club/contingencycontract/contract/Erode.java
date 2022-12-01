@@ -21,7 +21,10 @@ public class Erode extends Contract implements Listener {
      * @param e
      */
     @EventHandler
-    public void onEnemyCauseDamage(PlayerJoinEvent e){
+    public void onPlayerJoin(PlayerJoinEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (selectedIndex>=0){
             Double ratio = this.levelColumnZero.get(this.selectedIndex);
             e.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20*(1-ratio/100));

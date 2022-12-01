@@ -23,6 +23,7 @@ public abstract class Contract implements Listener {
     /**
      * How many level is added to total difficulty.
      */
+    public ArrayList<Integer> levelClass;
     public ArrayList<Double> levelColumnZero;
     public ArrayList<Double> levelColumnOne;
     public ArrayList<Double> levelColumnTwo;
@@ -49,6 +50,9 @@ public abstract class Contract implements Listener {
         this.iname = name;
         this.visible = config.getBoolean("Contract.".concat(name).concat(".visible"));
         this.selectedIndex = -1;
+        if (config.contains("Contract.".concat(name).concat(".levelclass"))){
+            this.levelClass = (ArrayList<Integer>) config.getIntegerList("Contract.".concat(name).concat(".levelclass"));
+        }
         if (config.contains("Contract.".concat(name).concat(".level0"))){
             this.levelColumnZero = (ArrayList<Double>) config.getDoubleList("Contract.".concat(name).concat(".level0"));
         }else{

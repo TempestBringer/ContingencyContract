@@ -24,6 +24,9 @@ public class HighValueTarget extends Contract implements Listener {
      */
     @EventHandler
     public void onFriendCauseDamage(EntityDamageByEntityEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (selectedIndex>=0){
             Entity damager = e.getDamager();
             Boolean flag=false;

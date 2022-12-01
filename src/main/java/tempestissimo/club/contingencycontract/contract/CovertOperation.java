@@ -26,6 +26,9 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onClickInventory(InventoryClickEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }
@@ -45,6 +48,9 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onInventoryEvent(InventoryMoveItemEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }
@@ -55,6 +61,9 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }
@@ -65,6 +74,9 @@ public class CovertOperation extends Contract implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }

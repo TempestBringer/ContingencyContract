@@ -17,6 +17,9 @@ public class BurnOut extends Contract implements Listener {
 
     @EventHandler
     public void onBlazeSpawn(CreatureSpawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0)
             return;
         if(e.getEntity().getType().equals(EntityType.BLAZE)){
@@ -24,7 +27,7 @@ public class BurnOut extends Contract implements Listener {
             blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*(1+this.levelColumnZero.get(this.selectedIndex)/100));
             blaze.setHealth(blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
             blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100));
-            blaze.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(this.levelColumnTwo.get(this.selectedIndex));
+            blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getBaseValue()*(1+this.levelColumnTwo.get(this.selectedIndex)/100));
         }
     }
 

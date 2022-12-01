@@ -14,6 +14,9 @@ public class MechanicalDisaster extends Contract implements Listener {
 
     @EventHandler
     public void onPistonExtend(BlockPistonExtendEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex>=0){
             e.setCancelled(true);
         }
@@ -21,6 +24,9 @@ public class MechanicalDisaster extends Contract implements Listener {
 
     @EventHandler
     public void onPistonRetract(BlockPistonRetractEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex>=0){
             e.setCancelled(true);
         }

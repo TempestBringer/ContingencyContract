@@ -17,6 +17,9 @@ public class ShareDamage extends Contract implements Listener {
 
     @EventHandler
     public void onPlayerSufferDamage(EntityDamageEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }

@@ -14,6 +14,9 @@ public class ThickMob extends Contract implements Listener {
 
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         EntityType type = e.getEntity().getType();
         if (this.selectedIndex<0)
             return;

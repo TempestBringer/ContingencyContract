@@ -26,6 +26,9 @@ public class Stimulation extends Contract implements Listener {
      */
     @EventHandler
     public void onEnemyCauseDamage(EntityDamageByEntityEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (selectedIndex>=0){
             Entity damager = e.getDamager();
             Boolean flag=false;

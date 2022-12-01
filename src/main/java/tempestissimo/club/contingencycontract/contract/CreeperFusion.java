@@ -18,6 +18,9 @@ public class CreeperFusion extends Contract implements Listener {
 
     @EventHandler
     public void onCreeperSpawn(CreatureSpawnEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0)
             return;
         if(e.getEntity().getType().equals(EntityType.CREEPER)){

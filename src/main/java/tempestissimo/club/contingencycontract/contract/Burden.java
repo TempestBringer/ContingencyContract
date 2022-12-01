@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.PlayerInventory;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
@@ -20,7 +21,10 @@ public class Burden extends Contract implements Listener {
     }
 
     @EventHandler
-    public void onDropItem(PlayerDropItemEvent e){
+    public void onPlayerMove(PlayerMoveEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             e.getPlayer().getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1);
             return;
@@ -31,39 +35,12 @@ public class Burden extends Contract implements Listener {
         Integer empty=0;
         for (int i = 0; i < 36; i++) {
             if (inventory.getItem(i)==null){
-              empty++;available++;
+                empty++;available++;
             } else if (!inventory.getItem(i).getType().equals(Material.BARRIER)){
                 available++;
             }
         }
         e.getPlayer().getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1*(1-ratio*(available-empty)/available));
-
-    }
-
-    @EventHandler
-    public void onDropItem(EntityPickupItemEvent e){
-        if (!e.getEntity().getType().equals(EntityType.PLAYER)){
-            return;
-        }
-        Player player = (Player)e.getEntity();
-        if (this.selectedIndex<0){
-            player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1);
-            return;
-        }
-        Double ratio = this.levelColumnZero.get(this.selectedIndex);
-        PlayerInventory inventory = player.getInventory();
-        Integer available=0;
-        Integer empty=0;
-        for (int i = 0; i < 36; i++) {
-            if (inventory.getItem(i)==null){
-                empty++;available++;
-            } else if (inventory.getItem(i).getType().equals(Material.AIR)){
-                empty++;available++;
-            } else if (!inventory.getItem(i).getType().equals(Material.BARRIER)){
-                available++;
-            }
-        }
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1*(1-ratio*(available-empty)/available));
 
     }
 

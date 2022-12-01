@@ -59,7 +59,6 @@ public class Services {
         }else{
             plugin.contracts.get(contractIndex).selectedIndex = level;
             broadcastContractSelect(player,contractIndex,level);
-
         }
     }
 
@@ -69,13 +68,14 @@ public class Services {
         textComponents.add(getTextComponent(player.getName(), ChatColor.RED));
         textComponents.add(getTextComponent("取消了合约 ", ChatColor.WHITE));
         textComponents.add(getTextComponent("[", ChatColor.RED));
-        TextComponent contract = getTextComponent(plugin.contracts.get(contractIndex).name.concat(numberToRoma((level+1))), ChatColor.RED);
+        TextComponent contract = getTextComponent(plugin.contracts.get(contractIndex).name.concat(numberToRoma((plugin.contracts.get(contractIndex).levelClass.get(level)))), ChatColor.RED);
         ArrayList<TextComponent> hoverText = getHoverText(contractIndex,level);
         contract.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,hoverText.toArray(new TextComponent[hoverText.size()])));
         textComponents.add(contract);
         textComponents.add(getTextComponent("]", ChatColor.RED));
         for(Player tell:getServer().getOnlinePlayers()){
             tell.spigot().sendMessage(textComponents.toArray(new TextComponent[textComponents.size()]));
+            sendTotalContractLevel(tell);
         }
     }
 
@@ -85,13 +85,14 @@ public class Services {
         textComponents.add(getTextComponent(player.getName(), ChatColor.RED));
         textComponents.add(getTextComponent("选择了合约 ", ChatColor.WHITE));
         textComponents.add(getTextComponent("[", ChatColor.RED));
-        TextComponent contract = getTextComponent(plugin.contracts.get(contractIndex).name.concat(numberToRoma((level+1))), ChatColor.RED);
+        TextComponent contract = getTextComponent(plugin.contracts.get(contractIndex).name.concat(numberToRoma((plugin.contracts.get(contractIndex).levelClass.get(level)))), ChatColor.RED);
         ArrayList<TextComponent> hoverText = getHoverText(contractIndex,level);
         contract.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,hoverText.toArray(new TextComponent[hoverText.size()])));
         textComponents.add(contract);
         textComponents.add(getTextComponent("]", ChatColor.RED));
         for(Player tell:getServer().getOnlinePlayers()){
             tell.spigot().sendMessage(textComponents.toArray(new TextComponent[textComponents.size()]));
+            sendTotalContractLevel(tell);
         }
     }
 
@@ -109,8 +110,8 @@ public class Services {
             if (!contract.visible){
                 continue;
             }
-            for (int j = 0; j < contract.levelColumnZero.size(); j++) {
-                TextComponent component = new TextComponent(" ["+name+numberToRoma(j+1)+"] ");
+            for (int j = 0; j < contract.levelClass.size(); j++) {
+                TextComponent component = new TextComponent(" ["+name+numberToRoma(contract.levelClass.get(j))+"] ");
                 ChatColor color = ChatColor.WHITE;
                 if (contract.selectedIndex==j){
                     color=ChatColor.DARK_RED;
@@ -135,19 +136,19 @@ public class Services {
         for (int i = 0; i < split.length; i++) {
             results.add(getTextComponent(split[i],ChatColor.WHITE));
         }
-        if (plugin.contracts.get(contractIndex).levelColumnFour.size()>0) {
+        if (plugin.contracts.get(contractIndex).levelColumnFour.size()>0&&plugin.contracts.get(contractIndex).levelColumnFour.get(level)!=0.0) {
             results.add(5, getTextComponent(plugin.contracts.get(contractIndex).levelColumnFour.get(level).toString(),ChatColor.RED));
         }
-        if (plugin.contracts.get(contractIndex).levelColumnThree.size()>0) {
+        if (plugin.contracts.get(contractIndex).levelColumnThree.size()>0&&plugin.contracts.get(contractIndex).levelColumnThree.get(level)!=0.0) {
             results.add(4, getTextComponent(plugin.contracts.get(contractIndex).levelColumnThree.get(level).toString(),ChatColor.RED));
         }
-        if (plugin.contracts.get(contractIndex).levelColumnTwo.size()>0) {
+        if (plugin.contracts.get(contractIndex).levelColumnTwo.size()>0&&plugin.contracts.get(contractIndex).levelColumnTwo.get(level)!=0.0) {
             results.add(3, getTextComponent(plugin.contracts.get(contractIndex).levelColumnTwo.get(level).toString(),ChatColor.RED));
         }
-        if (plugin.contracts.get(contractIndex).levelColumnOne.size()>0) {
+        if (plugin.contracts.get(contractIndex).levelColumnOne.size()>0&&plugin.contracts.get(contractIndex).levelColumnOne.get(level)!=0.0) {
             results.add(2, getTextComponent(plugin.contracts.get(contractIndex).levelColumnOne.get(level).toString(),ChatColor.RED));
         }
-        if (plugin.contracts.get(contractIndex).levelColumnZero.size()>0) {
+        if (plugin.contracts.get(contractIndex).levelColumnZero.size()>0&&plugin.contracts.get(contractIndex).levelColumnZero.get(level)!=0.0) {
             results.add(1, getTextComponent(plugin.contracts.get(contractIndex).levelColumnZero.get(level).toString(),ChatColor.RED));
         }
         return results;
@@ -186,6 +187,29 @@ public class Services {
         } else {
             return " X+";
         }
+    }
+
+    public void sendTotalContractLevel(Player player){
+        Integer level = calculateTotalContractLevel();
+        String text = config.getString("Information.TotalContractLevel.".concat(config.getString("General.Language"))).concat(" ");
+        ArrayList<TextComponent> textComponents = pluginNamePrefix();
+        textComponents.add(getTextComponent(text,ChatColor.WHITE));
+        textComponents.add(getTextComponent(String.valueOf(level),ChatColor.RED));
+        player.spigot().sendMessage(textComponents.toArray(new TextComponent[textComponents.size()]));
+    }
+
+
+    /**
+     * Get Total Contract Level
+     */
+    public Integer calculateTotalContractLevel(){
+        Integer result = 0;
+        for (Contract contract:plugin.contracts){
+            if (contract.selectedIndex>=0){
+                result+=(contract.levelClass.get(contract.selectedIndex));
+            }
+        }
+        return result;
     }
 
 

@@ -16,6 +16,9 @@ public class Bubble extends Contract implements Listener {
 
     @EventHandler
     public void onItemPickUp(EntityPickupItemEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if(this.selectedIndex<0){
             return;
         }
@@ -35,6 +38,9 @@ public class Bubble extends Contract implements Listener {
 
     @EventHandler
     public void onInvPickUpItem(InventoryPickupItemEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if(this.selectedIndex<0){
             return;
         }

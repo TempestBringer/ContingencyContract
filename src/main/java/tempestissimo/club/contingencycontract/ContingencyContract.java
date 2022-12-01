@@ -4,6 +4,7 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 import tempestissimo.club.contingencycontract.contract.*;
 import tempestissimo.club.contingencycontract.utils.Commands;
+import tempestissimo.club.contingencycontract.utils.GameCtrl;
 import tempestissimo.club.contingencycontract.utils.Services;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public final class ContingencyContract extends JavaPlugin {
     public ContingencyContract plugin;
     public ArrayList<Contract> contracts = new ArrayList<>();
     public Services service;
+    public GameCtrl ctrl;
 
     @Override
     public void onEnable() {
@@ -20,6 +22,7 @@ public final class ContingencyContract extends JavaPlugin {
         this.plugin = this;
         this.saveDefaultConfig();
         this.config = this.getConfig();
+        this.ctrl = new GameCtrl(plugin,config);
         //
         this.loadContracts();
         getServer().getPluginCommand("cc").setExecutor(new Commands(this.plugin,this.config));
@@ -57,7 +60,13 @@ public final class ContingencyContract extends JavaPlugin {
         contracts.add(new Eutrophic(config,plugin));
         contracts.add(new Bubble(config,plugin));
         contracts.add(new MineralPaucity(config,plugin));
-//        contracts.add(new Spin(config,plugin));
+        contracts.add(new HematopoieticDisorders(config,plugin));
+        contracts.add(new Tasteless(config,plugin));
+        contracts.add(new EnderLord(config,plugin));
+        contracts.add(new Insomnia(config,plugin));
+        contracts.add(new Pneumonia(config,plugin));
+        contracts.add(new ForeverNight(config,plugin));
+//        contracts.add(new ZombiePiglinAnger(config,plugin));
         getServer().getPluginManager().registerEvents(contracts.get(0),this);
         getServer().getPluginManager().registerEvents(contracts.get(1),this);
         getServer().getPluginManager().registerEvents(contracts.get(2),this);
@@ -78,6 +87,12 @@ public final class ContingencyContract extends JavaPlugin {
         getServer().getPluginManager().registerEvents(contracts.get(17),this);
         getServer().getPluginManager().registerEvents(contracts.get(18),this);
         getServer().getPluginManager().registerEvents(contracts.get(19),this);
+        getServer().getPluginManager().registerEvents(contracts.get(20),this);
+        getServer().getPluginManager().registerEvents(contracts.get(21),this);
+        getServer().getPluginManager().registerEvents(contracts.get(22),this);
+        getServer().getPluginManager().registerEvents(contracts.get(23),this);
+        getServer().getPluginManager().registerEvents(contracts.get(24),this);
+        getServer().getPluginManager().registerEvents(contracts.get(25),this);
     }
 
 }

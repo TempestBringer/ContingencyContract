@@ -15,6 +15,9 @@ public class SharpArrow extends Contract implements Listener {
 
     @EventHandler
     public void onShootArrow(EntityShootBowEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         Entity shooter = e.getEntity();
         if (this.selectedIndex<0)
             return;

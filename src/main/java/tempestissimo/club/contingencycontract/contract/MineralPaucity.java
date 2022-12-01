@@ -15,6 +15,9 @@ public class MineralPaucity extends Contract implements Listener {
 
     @EventHandler
     public void onBreakMineral(BlockBreakEvent e){
+        if (!plugin.ctrl.gameIsOn){
+            return;
+        }
         if (this.selectedIndex<0){
             return;
         }
