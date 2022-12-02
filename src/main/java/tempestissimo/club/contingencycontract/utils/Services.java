@@ -113,7 +113,7 @@ public class Services {
 
     public void broadcastGameStart(Player starter){
         ArrayList<TextComponent> result = pluginNamePrefix();
-        result.add(getTextComponent(config.getString("Information.GameStart.".concat(config.getString("General.Language"))),ChatColor.GREEN));
+        result.add(getTextComponent(starter.getName().concat(" ").concat(config.getString("Information.GameStart.".concat(config.getString("General.Language")))),ChatColor.GREEN));
         for (Player player:getServer().getOnlinePlayers()){
             player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
         }
@@ -131,12 +131,110 @@ public class Services {
         player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
     }
 
-    public void broadcastGameStop(){
+    public void broadcastGameStop(Player stopper){
         ArrayList<TextComponent> result = pluginNamePrefix();
         result.add(getTextComponent(config.getString("Information.GameStop.".concat(config.getString("General.Language"))),ChatColor.GREEN));
         for (Player player:getServer().getOnlinePlayers()){
             player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
         }
+    }
+
+    /**
+     * 私聊：有一项投票正在进行
+     * @param player
+     */
+    public void aVoteIsAlreadyRunning(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.AVoteIsRunning.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    /**
+     * 广播：开始进行终止合约投票
+     * @param starter
+     * @param seconds
+     */
+    public void broadcastStartGameStopVote(Player starter, Integer seconds){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        TextComponent playerName = getTextComponent(starter.getName(), ChatColor.RED);
+        result.add(playerName);
+        TextComponent text = getTextComponent(config.getString("Information.StartGameStopVote.".concat(config.getString("General.Language"))), ChatColor.WHITE);
+        result.add(text);
+        TextComponent  button = getTextComponent("[".concat(config.getString("Information.StartGameStopVoteButton.".concat(config.getString("General.Language")))).concat("]"),ChatColor.GREEN);
+        button.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/cc vote stop"));
+        result.add(button);
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }/**
+     * 广播：开始进行地图重置投票
+     * @param starter
+     * @param seconds
+     */
+    public void broadcastStartGameResetVote(Player starter, Integer seconds){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        TextComponent playerName = getTextComponent(starter.getName(), ChatColor.RED);
+        result.add(playerName);
+        TextComponent text = getTextComponent(config.getString("Information.StartGameResetVote.".concat(config.getString("General.Language"))), ChatColor.WHITE);
+        result.add(text);
+        TextComponent  button = getTextComponent("[".concat(config.getString("Information.StartGameResetVoteButton.".concat(config.getString("General.Language")))).concat("]"),ChatColor.GREEN);
+        button.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/cc vote reset"));
+        result.add(button);
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+    /**
+     * 广播：投票人数不足
+     */
+    public void voteNotEnough(){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.VoteNotEnough.".concat(config.getString("General.Language"))), ChatColor.RED));
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+    /**
+     * 私聊：非生存玩家投票
+     * @param player
+     */
+    public void voterNotSurvival(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.VoterNotSurvival.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+
+    }
+    /**
+     * 私聊：非生存玩家创建投票
+     * @param player
+     */
+    public void voteCreatorNotSurvival(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.VoteCreatorNotSurvival.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+
+    }
+
+    /**
+     * 私聊： 投票成功
+     * @param player
+     */
+    public void voteSuccess(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.VoteSuccess.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    /**
+     * 私聊：无进行的投票
+     * @param player
+     */
+    public void noVoteIsRunning(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.NoVoteIsRunning.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
     }
 
 

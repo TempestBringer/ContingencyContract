@@ -350,12 +350,17 @@ Contract:
       cn_zh: 锐箭
       en: Sharp Arrow
     localized_description:
-      cn_zh: 来自骷髅和掠夺者的弓箭的速度提升<!>%
+      cn_zh: 骷髅的移动速度提升<!>，弓箭伤害提升<!>%且火焰附加
       en: Enemy's arrow speed up <!>%
     levelclass:
       - 1
+      - 2
     level0:
+      - 30.0
       - 50.0
+    level1:
+      - 50.0
+      - 125.0
   Silence:
     visible: true
     localized_name:
@@ -432,13 +437,13 @@ Contract:
       - 96.0
 Information:
   GameStart:
-    cn_zh: 游戏开始
+    cn_zh: 开始了游戏
     en: GameStart
   GameHadStarted:
     cn_zh: 游戏已经开始了
     en: GameHadStarted
   GameStop:
-    cn_zh: 游戏结束
+    cn_zh: 合约已中止
     en: GameFinished
   gameHadStopped:
     cn_zh: 游戏未在进行
@@ -476,6 +481,42 @@ Information:
   TotalContractLevel:
     cn_zh: 总合约等级
     en: Total Contract Level
+  StartGameStopVote:
+    cn_zh: 发起了停止合约投票
+    en: start a vote to stop contract
+  StartGameResetVote:
+    cn_zh: 发起了地图重置投票
+    en: start a vote to reset map
+  StartGameStopVoteButton:
+    cn_zh: 点此同意
+    en: Click Here to Agree
+  StartGameResetVoteButton:
+    cn_zh: 点此同意
+    en: Click Here to Agree
+  AVoteIsRunning:
+    cn_zh: 有一项投票正在进行
+    en: A STOP CONTRACT vote is already running
+  VoteNotEnough:
+    cn_zh: 投票人数不足
+    en: Not Enough Vote
+  VoterNotSurvival:
+    cn_zh: 投票者非生存模式
+    en: Voter not SURVIVAL
+  VoteSuccess:
+    cn_zh: 投票成功
+    en: Vote Successful
+  NoVoteIsRunning:
+    cn_zh: 没有投票正在进行
+  VoteCreatorNotSurvival:
+    cn_zh: 创建投票者非生存模式
+    en: Vote Creator not SURVIVAL
+Vote:
+  Ratio:
+    stop: 0.5
+    reset: 0.5
+  Time:
+    stop: 15
+    reset: 15
 Status:
   Name:
     cn_zh: 数据

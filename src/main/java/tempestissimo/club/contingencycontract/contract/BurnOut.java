@@ -24,10 +24,20 @@ public class BurnOut extends Contract implements Listener {
             return;
         if(e.getEntity().getType().equals(EntityType.BLAZE)){
             Blaze blaze = (Blaze)e.getEntity();
-            blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*(1+this.levelColumnZero.get(this.selectedIndex)/100));
-            blaze.setHealth(blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
-            blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100));
-            blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getBaseValue()*(1+this.levelColumnTwo.get(this.selectedIndex)/100));
+            if (blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH)!=null){
+                Double healthValue = blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*(1+this.levelColumnZero.get(this.selectedIndex)/100);
+                blaze.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthValue);
+                blaze.setHealth(healthValue);
+            }
+            if (blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE)!=null){
+                Double atkValue = blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100);
+                blaze.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(atkValue);
+            }
+            if (blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED)!=null){
+                Double atkSpeedValue = blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getBaseValue()*(1+this.levelColumnTwo.get(this.selectedIndex)/100);
+                blaze.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(atkSpeedValue);
+            }
+
         }
     }
 

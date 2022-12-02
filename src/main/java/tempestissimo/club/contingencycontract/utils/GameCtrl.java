@@ -1,12 +1,16 @@
 package tempestissimo.club.contingencycontract.utils;
 
 import org.bukkit.GameMode;
+import org.bukkit.World;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
 import static org.bukkit.Bukkit.getServer;
@@ -23,11 +27,48 @@ public class GameCtrl implements Listener {
 
     public Boolean gameSuccess;
     public Boolean gameFail;
+    public World overWorld;
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
         if (gameIsOn){
             deathCount+=1;
+        }
+    }
+
+    // No wander before game start
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e){
+        if (gameIsOn){
+
+        }else{
+            //game is off
+            if ((!gameFail)&&(!gameSuccess)){
+                //not on
+                if ((e.getTo().getWorld()!=overWorld)||e.getTo().distance(overWorld.getSpawnLocation())>32){
+                    e.setTo(overWorld.getSpawnLocation());
+                }
+            } else if (gameSuccess&&(!gameFail)) {
+                //gameSuccess
+            } else if ((!gameSuccess)&& gameFail) {
+                //gameFail
+            } else{
+                //Error
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void onPlayerGetDragonEgg(PlayerAdvancementDoneEvent e){
+        if (gameIsOn){
+            Advancement advancement = e.getAdvancement();
+            if (advancement.getKey().getNamespace().equals("minecraft")&&advancement.getKey().getKey().equals("end/dragon_egg")){
+                gameIsOn = false;
+                gameSuccess = true;
+                gameFail = false;
+
+            }
         }
     }
 
@@ -52,18 +93,24 @@ public class GameCtrl implements Listener {
             deathCount = 0;
             gameSuccess = false;
             gameFail = false;
-            for (Player existPlayer:getServer().getOnlinePlayers()){
-                existPlayer.setGameMode(GameMode.SURVIVAL);
+            for (World world:getServer().getWorlds()){
+                if (world.getName().contains("nether")||world.getName().contains("end")){
+
+                }else{
+                    for (Player existPlayer:getServer().getOnlinePlayers()){
+                        existPlayer.teleport(world.getSpawnLocation());
+                        existPlayer.setGameMode(GameMode.SURVIVAL);
+                    }
+                }
+
             }
+
         }
     }
 
     public void stopGame(Player player){
         if (gameIsOn){
-            plugin.service.broadcastGameStop();
-            plugin.service.stopContracts();
-            this.gameIsOn = false;
-            endTime = System.currentTimeMillis();
+            plugin.vote.voteForGameStop(player);
         }else{//game is off
             plugin.service.gameHadStopped(player);
             return;
@@ -94,8 +141,7 @@ public class GameCtrl implements Listener {
         if (gameIsOn){
             plugin.service.gameIsRunning(player);
         }else{
-            plugin.service.gameWaitReset();
-            getServer().shutdown();
+            plugin.vote.voteForGameReset(player);
         }
     }
 
@@ -108,5 +154,11 @@ public class GameCtrl implements Listener {
         this.deathCount = 0;
         this.gameSuccess = false;
         this.gameFail = false;
+        for (World world:getServer().getWorlds()){
+            if ((!world.getName().contains("nether"))&&(!world.getName().contains("end"))){
+                this.overWorld = world;
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package tempestissimo.club.contingencycontract.contract;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -82,11 +83,13 @@ public class CovertOperation extends Contract implements Listener {
         if (this.selectedIndex<0){
             return;
         }
+        ItemStack barrier = new ItemStack(Material.BARRIER);
+        barrier.addEnchantment(Enchantment.VANISHING_CURSE,1);
         Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
         for (Player player:getServer().getOnlinePlayers()){
             PlayerInventory inventory = player.getInventory();
             for (int i = (int) (36*(1-ratio)); i < 36; i++) {
-                inventory.setItem(i,new ItemStack(Material.BARRIER));
+                inventory.setItem(i,barrier);
             }
         }
     }
@@ -99,11 +102,14 @@ public class CovertOperation extends Contract implements Listener {
         if (this.selectedIndex<0){
             return;
         }
+        ItemStack barrier = new ItemStack(Material.BARRIER);
+        barrier.addEnchantment(Enchantment.VANISHING_CURSE,1);
         Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
-        Player player = e.getPlayer();
-        PlayerInventory inventory = player.getInventory();
-        for (int i = (int) (36*(1-ratio)); i < 36; i++) {
-            inventory.setItem(i,new ItemStack(Material.BARRIER));
+        for (Player player:getServer().getOnlinePlayers()){
+            PlayerInventory inventory = player.getInventory();
+            for (int i = (int) (36*(1-ratio)); i < 36; i++) {
+                inventory.setItem(i,barrier);
+            }
         }
     }
 
@@ -116,11 +122,13 @@ public class CovertOperation extends Contract implements Listener {
         if (this.selectedIndex<0){
             return;
         }
+        ItemStack barrier = new ItemStack(Material.BARRIER);
+        barrier.addUnsafeEnchantment(Enchantment.VANISHING_CURSE,1);
         Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
         for (Player player:getServer().getOnlinePlayers()){
             PlayerInventory inventory = player.getInventory();
             for (int i = (int) (36*(1-ratio)); i < 36; i++) {
-                inventory.setItem(i,new ItemStack(Material.BARRIER));
+                inventory.setItem(i,barrier);
             }
         }
     }

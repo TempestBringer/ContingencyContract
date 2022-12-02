@@ -62,6 +62,21 @@ public class Commands implements CommandExecutor, TabCompleter {
                 }else if (args[0].equalsIgnoreCase("reset")){
                     plugin.ctrl.resetGame(player);
                     return true;
+                }else if (args[0].equalsIgnoreCase("vote")){
+                    if (args.length<2){
+                        plugin.service.notEnoughArguments(player);
+                        return true;
+                    } else if (args.length>2) {
+                        plugin.service.tooManyArguments(player);
+                        return true;
+                    } else{
+                        if (args[1].equalsIgnoreCase("stop")){
+                            plugin.vote.playerVoteGameStop(player);
+                        } else if (args[1].equalsIgnoreCase("reset")) {
+                            plugin.vote.playerVoteGameReset(player);
+                        }
+                    }
+                    return true;
                 }
 
             }

@@ -88,8 +88,28 @@ public class Stats {
                         }
                     } else if (plugin.ctrl.gameSuccess&&(!plugin.ctrl.gameFail)) {
                         //success
+                        Objective stats = pluginScoreboard.getObjective("stats");
+                        if (stats ==null){
+                            pluginScoreboard.registerNewObjective("stats",Criteria.DUMMY,"合约完成");
+                        }
+                        stats.setDisplayName("合约完成");
+
+                        stats.setDisplaySlot(DisplaySlot.SIDEBAR);
+                        for (Player player:getServer().getOnlinePlayers()){
+                            player.setScoreboard(stats.getScoreboard());
+                        }
                     } else if ((!plugin.ctrl.gameSuccess)&&plugin.ctrl.gameFail) {
                         //Fail
+                        Objective stats = pluginScoreboard.getObjective("stats");
+                        if (stats ==null){
+                            pluginScoreboard.registerNewObjective("stats",Criteria.DUMMY,"合约失败");
+                        }
+                        stats.setDisplayName("合约失败");
+
+                        stats.setDisplaySlot(DisplaySlot.SIDEBAR);
+                        for (Player player:getServer().getOnlinePlayers()){
+                            player.setScoreboard(stats.getScoreboard());
+                        }
                     } else if (plugin.ctrl.gameSuccess&&plugin.ctrl.gameFail) {
                         //Error
                     }
