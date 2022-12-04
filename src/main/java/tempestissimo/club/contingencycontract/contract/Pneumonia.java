@@ -28,7 +28,6 @@ public class Pneumonia extends Contract implements Listener {
             Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
             int maxAir = (int) (300.0*(1.0-ratio));
             player.setMaximumAir(maxAir);
-            player.setRemainingAir(maxAir);
         }
 
 

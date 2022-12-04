@@ -78,6 +78,13 @@ public class Commands implements CommandExecutor, TabCompleter {
                     }
                     return true;
                 }
+//                else if (args[0].equalsIgnoreCase("create")){
+//                    plugin.world.createWorldGroup();
+//                    return true;
+//                }else if (args[0].equalsIgnoreCase("remove")){
+//                    plugin.world.unloadWorldGroup();
+//                    return true;
+//                }
 
             }
         }

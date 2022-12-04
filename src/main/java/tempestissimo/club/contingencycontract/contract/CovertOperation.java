@@ -84,7 +84,7 @@ public class CovertOperation extends Contract implements Listener {
             return;
         }
         ItemStack barrier = new ItemStack(Material.BARRIER);
-        barrier.addEnchantment(Enchantment.VANISHING_CURSE,1);
+        barrier.addUnsafeEnchantment(Enchantment.VANISHING_CURSE,1);
         Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
         for (Player player:getServer().getOnlinePlayers()){
             PlayerInventory inventory = player.getInventory();
@@ -103,7 +103,7 @@ public class CovertOperation extends Contract implements Listener {
             return;
         }
         ItemStack barrier = new ItemStack(Material.BARRIER);
-        barrier.addEnchantment(Enchantment.VANISHING_CURSE,1);
+        barrier.addUnsafeEnchantment(Enchantment.VANISHING_CURSE,1);
         Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
         for (Player player:getServer().getOnlinePlayers()){
             PlayerInventory inventory = player.getInventory();

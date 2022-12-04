@@ -15,6 +15,7 @@ public final class ContingencyContract extends JavaPlugin {
     public GameCtrl ctrl;
     public Stats stats;
     public Voter vote;
+//    public WorldCreate world;
 
     @Override
     public void onEnable() {
@@ -23,8 +24,9 @@ public final class ContingencyContract extends JavaPlugin {
         this.saveDefaultConfig();
         this.config = this.getConfig();
         this.ctrl = new GameCtrl(plugin,config);
-        this.stats = new Stats(plugin, config, getServer().getScoreboardManager());
+        this.stats = new Stats(plugin, config);
         this.vote = new Voter(plugin,config);
+//        this.world = new WorldCreate(plugin,config);
         getServer().getPluginManager().registerEvents(this.ctrl,this);
         //
         this.loadContracts();

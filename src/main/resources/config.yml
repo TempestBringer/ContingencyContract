@@ -351,7 +351,7 @@ Contract:
       en: Sharp Arrow
     localized_description:
       cn_zh: 骷髅的移动速度提升<!>，弓箭伤害提升<!>%且火焰附加
-      en: Enemy's arrow speed up <!>%
+      en: Skeleton's speed +<!>%,arrow damage +<!>% and set fire
     levelclass:
       - 1
       - 2

@@ -32,11 +32,11 @@ public class Stats {
         return config.getString("Status.".concat(source).concat(".").concat(config.getString("General.Language")));
     }
 
-    public Stats(ContingencyContract plugin, Configuration config, ScoreboardManager manager) {
+    public Stats(ContingencyContract plugin, Configuration config) {
         this.plugin = plugin;
         this.config = config;
-        this.manager = manager;
-        this.pluginScoreboard = manager.getNewScoreboard();
+        this.manager = getServer().getScoreboardManager();
+        this.pluginScoreboard = getServer().getScoreboardManager().getNewScoreboard();
         this.firstRunCheck();
         this.thread = new BukkitRunnable() {
             @Override
