@@ -42,17 +42,13 @@ Contract:
     levelclass:
       - 1
       - 2
-      - 3
     level0:
-      - 50.0
       - 100.0
       - 200.0
     level1:
-      - 20.0
       - 40.0
       - 80.0
     level2:
-      - 50.0
       - 100.0
       - 200.0
   CovertOperation:
@@ -294,14 +290,14 @@ Contract:
       cn_zh: 易燃
       en: OnFire
     localized_description:
-      cn_zh: 你易燃
+      cn_zh: <!>格内的高温源使你着火，包括身上的岩浆桶
       en: You are easily catch fire
     levelclass:
       - 1
       - 2
     level0:
-      - 3.0
-      - 6.0
+      - 2.0
+      - 4.0
   Pneumonia:
     visible: true
     localized_name:
@@ -421,6 +417,23 @@ Contract:
       - 50.0
       - 100.0
       - 200.0
+  WhiteTerror:
+    visible: true
+    localized_name:
+      cn_zh: 白色恐怖
+      en: White Terror
+    localized_description:
+      cn_zh: 恶魂的生命值+<!>%，攻击速度+<!>%
+      en: Ghast's max health +<!>%
+    levelclass:
+      - 1
+      - 2
+    level0:
+      - 100.0
+      - 200.0
+    level1:
+      - 200.0
+      - 400.0
   ZombiePiglinAnger:
     visible: true
     localized_name:
@@ -510,6 +523,28 @@ Information:
   VoteCreatorNotSurvival:
     cn_zh: 创建投票者非生存模式
     en: Vote Creator not SURVIVAL
+Position:
+  PlayerJoin:
+    world: world_lobby
+    spawn_point_override: false
+  OverWorld:
+    world: world
+    spawn_point_override: false
+  Nether:
+    world: world_nether
+    spawn_point_override: false
+  End:
+    world: world_the_end
+    spawn_point_override: false
+WorldGenerate:
+  LoadWorld:
+    - world
+    - world_the_end
+    - world_nether
+    - world_lobby
+  GenerateArguments:
+    world_lobby:
+
 Vote:
   Ratio:
     stop: 0.5

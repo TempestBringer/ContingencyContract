@@ -27,7 +27,6 @@ public class GameCtrl implements Listener {
 
     public Boolean gameSuccess;
     public Boolean gameFail;
-    public World overWorld;
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
@@ -45,8 +44,8 @@ public class GameCtrl implements Listener {
             //game is off
             if ((!gameFail)&&(!gameSuccess)){
                 //not on
-                if ((e.getTo().getWorld()!=overWorld)||e.getTo().distance(overWorld.getSpawnLocation())>32){
-                    e.setTo(overWorld.getSpawnLocation());
+                if ((e.getTo().getWorld()!=plugin.location.getLobbySpawnPoint().getWorld())){
+                    e.setTo(plugin.location.getLobbySpawnPoint());
                 }
             } else if (gameSuccess&&(!gameFail)) {
                 //gameSuccess
@@ -72,12 +71,17 @@ public class GameCtrl implements Listener {
         }
     }
 
+    /**
+     * Action After Player Join Game
+     * @param e
+     */
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e){
         if (gameIsOn){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
         }else{
-            e.getPlayer().setGameMode(GameMode.SPECTATOR);
+            e.getPlayer().setGameMode(GameMode.ADVENTURE);
+            e.getPlayer().teleport(plugin.location.getLobbySpawnPoint());
         }
     }
 
@@ -93,18 +97,11 @@ public class GameCtrl implements Listener {
             deathCount = 0;
             gameSuccess = false;
             gameFail = false;
-            for (World world:getServer().getWorlds()){
-                if (world.getName().contains("nether")||world.getName().contains("end")){
-
-                }else{
-                    for (Player existPlayer:getServer().getOnlinePlayers()){
-                        existPlayer.teleport(world.getSpawnLocation());
-                        existPlayer.setGameMode(GameMode.SURVIVAL);
-                    }
-                }
-
+            for (Player existPlayer:getServer().getOnlinePlayers()){
+                existPlayer.teleport(plugin.location.getOverWorldSpawnPoint());
+                existPlayer.setGameMode(GameMode.SURVIVAL);
             }
-
+            plugin.location.getOverWorldSpawnPoint().getWorld().setTime(0);
         }
     }
 
@@ -154,11 +151,6 @@ public class GameCtrl implements Listener {
         this.deathCount = 0;
         this.gameSuccess = false;
         this.gameFail = false;
-        for (World world:getServer().getWorlds()){
-            if ((!world.getName().contains("nether"))&&(!world.getName().contains("end"))){
-                this.overWorld = world;
-            }
-        }
 
     }
 }

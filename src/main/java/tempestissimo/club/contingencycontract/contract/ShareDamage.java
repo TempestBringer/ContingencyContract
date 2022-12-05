@@ -23,9 +23,12 @@ public class ShareDamage extends Contract implements Listener {
         if (this.selectedIndex<0){
             return;
         }
+        if (e.getDamage()<0){
+            return;
+        }
         if(e.getEntity().getType().equals(EntityType.PLAYER)){
             Player player = (Player) e.getEntity();
-            Double damage = e.getFinalDamage();
+            Double damage = e.getDamage();
             Double ratio = this.levelColumnZero.get(this.selectedIndex)/100;
             for (Player other:getServer().getOnlinePlayers()){
                 if (!other.getName().equals(player.getName())) {

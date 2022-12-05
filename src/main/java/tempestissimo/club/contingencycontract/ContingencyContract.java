@@ -11,10 +11,15 @@ public final class ContingencyContract extends JavaPlugin {
     public Configuration config;
     public ContingencyContract plugin;
     public ArrayList<Contract> contracts = new ArrayList<>();
+    public Commands command;
     public Services service;
     public GameCtrl ctrl;
     public Stats stats;
     public Voter vote;
+
+    public WorldManage worldManage;
+
+    public WorldLocation location;
 //    public WorldCreate world;
 
     @Override
@@ -23,14 +28,17 @@ public final class ContingencyContract extends JavaPlugin {
         this.plugin = this;
         this.saveDefaultConfig();
         this.config = this.getConfig();
+        this.worldManage = new WorldManage(plugin, config);
         this.ctrl = new GameCtrl(plugin,config);
         this.stats = new Stats(plugin, config);
         this.vote = new Voter(plugin,config);
-//        this.world = new WorldCreate(plugin,config);
+        this.location = new WorldLocation(plugin,config);
         getServer().getPluginManager().registerEvents(this.ctrl,this);
         //
         this.loadContracts();
-        getServer().getPluginCommand("cc").setExecutor(new Commands(this.plugin,this.config));
+        this.command = new Commands(this.plugin,this.config);
+        getServer().getPluginCommand("cc").setExecutor(command);
+        getServer().getPluginCommand("cc").setTabCompleter(command);
         this.service = new Services(plugin,config);
 
 
@@ -71,7 +79,8 @@ public final class ContingencyContract extends JavaPlugin {
         contracts.add(new Insomnia(config,plugin));
         contracts.add(new Pneumonia(config,plugin));
         contracts.add(new ForeverNight(config,plugin));
-//        contracts.add(new ZombiePiglinAnger(config,plugin));
+        contracts.add(new OnFire(config,plugin));
+        contracts.add(new WhiteTerror(config,plugin));
         getServer().getPluginManager().registerEvents(contracts.get(0),this);
         getServer().getPluginManager().registerEvents(contracts.get(1),this);
         getServer().getPluginManager().registerEvents(contracts.get(2),this);
@@ -98,6 +107,8 @@ public final class ContingencyContract extends JavaPlugin {
         getServer().getPluginManager().registerEvents(contracts.get(23),this);
         getServer().getPluginManager().registerEvents(contracts.get(24),this);
         getServer().getPluginManager().registerEvents(contracts.get(25),this);
+        getServer().getPluginManager().registerEvents(contracts.get(26),this);
+        getServer().getPluginManager().registerEvents(contracts.get(27),this);
     }
 
 }
