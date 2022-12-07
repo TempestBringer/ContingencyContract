@@ -16,6 +16,8 @@ public class Stats {
     public Scoreboard pluginScoreboard;
     public BukkitRunnable thread;
 
+    public Integer reDeploy;
+
     public void firstRunCheck(){
         if(pluginScoreboard.getObjective("stats")==null){
             scoreBoardInit("stats", "合约进行中");
@@ -57,8 +59,8 @@ public class Stats {
                     Score scoreTime = stats.getScore("耗时");
                     scoreTime.setScore(Math.toIntExact(seconds));
                     // DeathCount
-                    Integer deathCount = plugin.ctrl.deathCount;
-                    Score scoreDeath = stats.getScore("死亡");
+                    Integer deathCount = plugin.ctrl.maxReDeploy - plugin.ctrl.deathCount;
+                    Score scoreDeath = stats.getScore("再部署");
                     scoreDeath.setScore(deathCount);
                     stats.setDisplaySlot(DisplaySlot.SIDEBAR);
                     for (Player player:getServer().getOnlinePlayers()){
@@ -79,8 +81,8 @@ public class Stats {
                         Score scoreTime = stats.getScore("耗时");
                         scoreTime.setScore(Math.toIntExact(0));
                         // DeathCount
-                        Integer deathCount = plugin.ctrl.deathCount;
-                        Score scoreDeath = stats.getScore("死亡");
+                        Integer deathCount = plugin.ctrl.maxReDeploy - plugin.ctrl.deathCount;
+                        Score scoreDeath = stats.getScore("再部署");
                         scoreDeath.setScore(deathCount);
                         stats.setDisplaySlot(DisplaySlot.SIDEBAR);
                         for (Player player:getServer().getOnlinePlayers()){

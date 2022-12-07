@@ -91,6 +91,22 @@ Contract:
       - 50.0
       - 100.0
       - 200.0
+  DeathLimit:
+    visible: true
+    localized_name:
+      cn_zh: 战术容错
+      en: Death Limit
+    localized_description:
+      cn_zh: 全局共享开局人数 x <!>的再部署次数， 无等级则为30.
+      en: All players share number of players multiply <!> times of re-deploy. 60 by default.
+    levelclass:
+      - 2
+      - 4
+      - 6
+    level0:
+      - 20.0
+      - 10.0
+      - 5.0
   EnderLord:
     visible: true
     localized_name:
@@ -284,6 +300,34 @@ Contract:
     level0:
       - 30.0
       - 75.0
+  NoFish:
+    visible: true
+    localized_name:
+      cn_zh: 海之嫌弃
+      en: No Fish
+    localized_description:
+      cn_zh: 海不回应，但你仍能学到些什么
+      en: The sea respond nothing, but you still learn from it.
+    levelclass:
+      - 1
+    level0:
+      - 0.0
+  Octane:
+    visible: true
+    localized_name:
+      cn_zh: 辛烷
+      en: Octane
+    localized_description:
+      cn_zh: 敌对生物移速增加<!>%
+      en: Mob's move speed +<!>%
+    levelclass:
+      - 1
+      - 2
+      - 3
+    level0:
+      - 30.0
+      - 60.0
+      - 100.0
   OnFire:
     visible: true
     localized_name:
@@ -423,16 +467,13 @@ Contract:
       cn_zh: 白色恐怖
       en: White Terror
     localized_description:
-      cn_zh: 恶魂的生命值+<!>%，攻击速度+<!>%
-      en: Ghast's max health +<!>%
+      cn_zh: 恶魂的生命值+<!>%，移动速度+<!>%
+      en: Ghast's max health +<!>%, move speed +<!>%
     levelclass:
       - 1
-      - 2
     level0:
-      - 100.0
       - 200.0
     level1:
-      - 200.0
       - 400.0
   ZombiePiglinAnger:
     visible: true
@@ -440,14 +481,12 @@ Contract:
       cn_zh: 猪灵敌意
       en: ZombiePiglinAnger
     localized_description:
-      cn_zh: <!>格内的僵尸猪人憎恨你
-      en: Zombie piglin in <!> blocks hate You
+      cn_zh: 僵尸猪人憎恨你
+      en: Zombie piglin hate You
     levelclass:
       - 1
-      - 2
     level0:
-      - 48.0
-      - 96.0
+      - 0.0
 Information:
   GameStart:
     cn_zh: 开始了游戏
@@ -494,6 +533,12 @@ Information:
   TotalContractLevel:
     cn_zh: 总合约等级
     en: Total Contract Level
+  StartPlayerJoinVote:
+    cn_zh: 想要加入游戏
+    en: want to join
+  StartPlayerJoinVoteButton:
+    cn_zh: 赞同加入
+    en: Agree Join
   StartGameStopVote:
     cn_zh: 发起了停止合约投票
     en: start a vote to stop contract
@@ -515,6 +560,9 @@ Information:
   VoterNotSurvival:
     cn_zh: 投票者非生存模式
     en: Voter not SURVIVAL
+  voterNotSurvivalOrAdventure:
+    cn_zh: 投票者非生存模式或冒险模式
+    en: Voter not SURVIVAL or ADVENTURE
   VoteSuccess:
     cn_zh: 投票成功
     en: Vote Successful
@@ -523,6 +571,12 @@ Information:
   VoteCreatorNotSurvival:
     cn_zh: 创建投票者非生存模式
     en: Vote Creator not SURVIVAL
+  voteCreatorNotSurvivalOrAdventure:
+    cn_zh: 创建投票者非生存模式或冒险模式
+    en: Vote Creator not SURVIVAL or ADVENTURE
+  NoVoteForSelf:
+    cn_zh: 不可为自己投票
+    en: No Self Vote
 Position:
   PlayerJoin:
     world: world_lobby
@@ -549,9 +603,11 @@ Vote:
   Ratio:
     stop: 0.5
     reset: 0.5
+    join: 0.5
   Time:
     stop: 15
     reset: 15
+    join: 15
 Status:
   Name:
     cn_zh: 数据

@@ -58,6 +58,9 @@ public class Voter {
                         plugin.service.stopContracts();
                         plugin.ctrl.gameIsOn = false;
                         plugin.ctrl.endTime = System.currentTimeMillis();
+                        for (Player p:getServer().getOnlinePlayers()){
+                            p.setGameMode(GameMode.ADVENTURE);
+                        }
                     }else{
                         // notOK
                         plugin.service.voteNotEnough();
@@ -81,19 +84,19 @@ public class Voter {
             plugin.service.noVoteIsRunning(player);
             return;
         }
-        if (player.getGameMode().equals(GameMode.SURVIVAL)){
+        if (player.getGameMode().equals(GameMode.SURVIVAL)||player.getGameMode().equals(GameMode.ADVENTURE)){
             voteResetPool.put(player.getName(),true);
             plugin.service.voteSuccess(player);
         }else{
-            plugin.service.voterNotSurvival(player);
+            plugin.service.voterNotSurvivalOrAdventure(player);
         }
     }
 
     public void voteForGameReset(Player player){
         if (resetIsVoting){
             plugin.service.aVoteIsAlreadyRunning(player);
-        }else if(!player.getGameMode().equals(GameMode.SURVIVAL)){
-            plugin.service.voteCreatorNotSurvival(player);
+        }else if((!player.getGameMode().equals(GameMode.SURVIVAL)&&(!player.getGameMode().equals(GameMode.ADVENTURE)))){
+            plugin.service.voteCreatorNotSurvivalOrAdventure(player);
         }else{
             resetIsVoting = true;
             voteResetPool = new HashMap<>();
@@ -107,21 +110,17 @@ public class Voter {
                     int vote = voteResetPool.keySet().size();
                     int total = 0;
                     for (Player allPlayer:getServer().getOnlinePlayers()){
-                        if (allPlayer.getGameMode().equals(GameMode.SURVIVAL)){
+                        if (allPlayer.getGameMode().equals(GameMode.SURVIVAL)||allPlayer.getGameMode().equals(GameMode.ADVENTURE)){
                             total++;
                         }
                     }
                     if (vote>ratio*total){
                         // ok
                         plugin.service.gameWaitReset();
-
                         getServer().shutdown();
-
-
                     }else{
                         // notOK
                         plugin.service.voteNotEnough();
-
                     }
                     resetIsVoting = false;
                     this.cancel();
@@ -132,10 +131,72 @@ public class Voter {
 
     }
 
+    public Boolean joinIsVoting;
+    public BukkitRunnable voteJoinThread;
+    public HashMap<String,Boolean> voteJoinPool;
+
+    public void playerVoteJoin(Player player){
+        if (!joinIsVoting){
+            plugin.service.noVoteIsRunning(player);
+            return;
+        }
+        if (player.getGameMode().equals(GameMode.SURVIVAL)){
+            voteJoinPool.put(player.getName(),true);
+            plugin.service.voteSuccess(player);
+        }else{
+            plugin.service.voterNotSurvival(player);
+        }
+    }
+
+    public void voteForJoin(Player player){
+        if (joinIsVoting){
+            plugin.service.aVoteIsAlreadyRunning(player);
+        }else if(!player.getGameMode().equals(GameMode.SURVIVAL)){
+            plugin.service.voteCreatorNotSurvival(player);
+        }else{
+            joinIsVoting = true;
+            voteJoinPool = new HashMap<>();
+            int seconds = config.getInt("Vote.Time.join");
+            double ratio = config.getDouble("Vote.Ratio.join");
+//            plugin.service.broadcastStartGameStopVote(player,seconds);
+
+            voteJoinThread = new BukkitRunnable() {
+                @Override
+                public void run() {
+                    int vote = voteJoinPool.keySet().size();
+                    int total = 0;
+                    for (Player allPlayer:getServer().getOnlinePlayers()){
+                        if (allPlayer.getGameMode().equals(GameMode.SURVIVAL)){
+                            total++;
+                        }
+                    }
+                    if (vote>ratio*total){
+                        // ok
+//                        plugin.service.broadcastGameStop(player);
+//                        plugin.service.stopContracts();
+//                        plugin.ctrl.gameIsOn = false;
+//                        plugin.ctrl.endTime = System.currentTimeMillis();
+                    }else{
+                        // notOK
+                        plugin.service.voteNotEnough();
+
+                    }
+                    joinIsVoting = false;
+                    this.cancel();
+                }
+            };
+            voteJoinThread.runTaskLater(plugin, seconds*20);
+        }
+
+    }
+
+
+
     public Voter(ContingencyContract plugin, Configuration config) {
         this.plugin = plugin;
         this.config = config;
         this.stopIsVoting = false;
         this.resetIsVoting = false;
+        this.joinIsVoting = false;
     }
 }

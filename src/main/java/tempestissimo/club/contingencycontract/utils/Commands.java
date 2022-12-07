@@ -74,53 +74,56 @@ public class Commands implements CommandExecutor, TabCompleter {
                             plugin.vote.playerVoteGameStop(player);
                         } else if (args[1].equalsIgnoreCase("reset")) {
                             plugin.vote.playerVoteGameReset(player);
+                        } else if (args[1].equalsIgnoreCase("join")) {
+                            plugin.vote.playerVoteGameReset(player);
                         }
                     }
                     return true;
-                }else if (args[0].equalsIgnoreCase("create")){
-                    if (args.length==2){
-                        if (args[1].equalsIgnoreCase("normal")){
-                            plugin.worldManage.generateWorld();
-                        }else if (args[1].equalsIgnoreCase("nether")){
-                            plugin.worldManage.generateNether();
-                        }else if (args[1].equalsIgnoreCase("end")){
-                            plugin.worldManage.generateTheEnd();
-                        }
-                    } else if(args.length==3){
-                        if (args[1].equalsIgnoreCase("normal")){
-                            plugin.worldManage.generateWorld(args[2]);
-                        }else if (args[1].equalsIgnoreCase("nether")){
-                            plugin.worldManage.generateNether(args[2]);
-                        }else if (args[1].equalsIgnoreCase("end")){
-                            plugin.worldManage.generateTheEnd(args[2]);
-                        }
-                    }else if (args.length<2){
-                        plugin.service.notEnoughArguments(player);
-                    } else if (args.length>2) {
-                        plugin.service.tooManyArguments(player);
-                    }
-                    return true;
-                }else if (args[0].equalsIgnoreCase("remove")){
-                    if (args.length==2){
-                        plugin.worldManage.removeWorld(args[1]);
-                    }else if (args.length<2){
-                        plugin.service.notEnoughArguments(player);
-                    } else if (args.length>2) {
-                        plugin.service.tooManyArguments(player);
-                    }
-                    return true;
-                }else if (args[0].equalsIgnoreCase("teleport")){
-                    if (args.length==2){
-                        plugin.worldManage.teleportWorld(args[1], player);
-                    }else if (args.length<2){
-                        plugin.service.notEnoughArguments(player);
-                    } else if (args.length>2) {
-                        plugin.service.tooManyArguments(player);
-                    }
-                    return true;
-                }else if (args[0].equalsIgnoreCase("worldList")){
-                    plugin.worldManage.getWorldList();
-                    return true;
+//                }
+//                else if (args[0].equalsIgnoreCase("create")){
+//                    if (args.length==2){
+//                        if (args[1].equalsIgnoreCase("normal")){
+//                            plugin.worldManage.generateWorld();
+//                        }else if (args[1].equalsIgnoreCase("nether")){
+//                            plugin.worldManage.generateNether();
+//                        }else if (args[1].equalsIgnoreCase("end")){
+//                            plugin.worldManage.generateTheEnd();
+//                        }
+//                    } else if(args.length==3){
+//                        if (args[1].equalsIgnoreCase("normal")){
+//                            plugin.worldManage.generateWorld(args[2]);
+//                        }else if (args[1].equalsIgnoreCase("nether")){
+//                            plugin.worldManage.generateNether(args[2]);
+//                        }else if (args[1].equalsIgnoreCase("end")){
+//                            plugin.worldManage.generateTheEnd(args[2]);
+//                        }
+//                    }else if (args.length<2){
+//                        plugin.service.notEnoughArguments(player);
+//                    } else if (args.length>2) {
+//                        plugin.service.tooManyArguments(player);
+//                    }
+//                    return true;
+//                }else if (args[0].equalsIgnoreCase("remove")){
+//                    if (args.length==2){
+//                        plugin.worldManage.removeWorld(args[1]);
+//                    }else if (args.length<2){
+//                        plugin.service.notEnoughArguments(player);
+//                    } else if (args.length>2) {
+//                        plugin.service.tooManyArguments(player);
+//                    }
+//                    return true;
+//                }else if (args[0].equalsIgnoreCase("teleport")){
+//                    if (args.length==2){
+//                        plugin.worldManage.teleportWorld(args[1], player);
+//                    }else if (args.length<2){
+//                        plugin.service.notEnoughArguments(player);
+//                    } else if (args.length>2) {
+//                        plugin.service.tooManyArguments(player);
+//                    }
+//                    return true;
+//                }else if (args[0].equalsIgnoreCase("worldList")){
+//                    plugin.worldManage.getWorldList();
+//                    return true;
                 }
             }
         }
@@ -130,26 +133,29 @@ public class Commands implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> results = new ArrayList<>();
-        if (command.getName().equalsIgnoreCase("cc")){
-            if (!(sender instanceof Player)){
-                plugin.service.infoShouldSendMessageAsPlayer(sender);
-                return results;
-            }
-            Player player = (Player) sender;
-            if (args.length==0){
-                results.add("start");
-                results.add("stop");
-                results.add("list");
-                results.add("help");
-                results.add("reset");
-                results.add("create");
-                results.add("remove");
-                results.add("teleport");
-                results.add("worldList");
-            } else if (args.length ==1) {
+//        if (command.getName().equalsIgnoreCase("cc")){
+//            if (!(sender instanceof Player)){
+//                plugin.service.infoShouldSendMessageAsPlayer(sender);
+//                return results;
+//            }
+//            Player player = (Player) sender;
+//            if (args.length==0){
+//
+//            } else if (args.length ==1) {
+//
+//            }
+//        }
+        results.add("start");
+        results.add("stop");
+        results.add("list");
+        results.add("help");
+        results.add("reset");
 
-            }
-        }
+//
+//        results.add("create");
+//        results.add("remove");
+//        results.add("teleport");
+//        results.add("worldList");
         return results;
 
     }

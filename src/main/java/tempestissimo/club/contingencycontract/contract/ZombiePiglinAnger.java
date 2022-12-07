@@ -1,13 +1,11 @@
 package tempestissimo.club.contingencycontract.contract;
 
 import org.bukkit.configuration.Configuration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Piglin;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
 import java.util.List;
@@ -18,26 +16,27 @@ public class ZombiePiglinAnger extends Contract implements Listener {
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e){
+    public void onPlayerLoadChunk(ChunkLoadEvent e){
         if (!plugin.ctrl.gameIsOn){
             return;
         }
         if (this.selectedIndex<0){
             return;
         }
-        Double radius = this.levelColumnZero.get(this.selectedIndex);
-        List<Entity> nearbyEntities = e.getPlayer().getNearbyEntities(radius, radius, radius);
-        for (Entity entity:nearbyEntities){
+        if (!e.getWorld().getName().contains("nether")){
+            return;
+        }
+        for (Entity entity:e.getChunk().getEntities()){
             if (entity.getType().equals(EntityType.ZOMBIFIED_PIGLIN)){
                 PigZombie zombiePig = (PigZombie) entity;
-//                zombiePig.damage(0.0, e.getPlayer());
-                zombiePig.setAnger(65535);
-                zombiePig.setAngry(true);
+                List<Entity> nearbyEntities = zombiePig.getNearbyEntities(32, 32, 32);
+                for (Entity p:nearbyEntities){
+                    if (p.getType().equals(EntityType.PLAYER)){
+                        zombiePig.damage(1E-7,p);
+                    }
+                }
+
             }
-//            else if (entity.getType().equals(EntityType.PIGLIN)){
-//                Piglin piglin = (Piglin) entity;
-//                piglin.damage(0.0, e.getPlayer());
-//            }
         }
     }
 

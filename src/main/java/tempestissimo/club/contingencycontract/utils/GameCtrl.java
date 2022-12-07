@@ -24,6 +24,7 @@ public class GameCtrl implements Listener {
     public Long endTime;
 
     public Integer deathCount;
+    public Integer maxReDeploy;
 
     public Boolean gameSuccess;
     public Boolean gameFail;
@@ -33,6 +34,18 @@ public class GameCtrl implements Listener {
         if (gameIsOn){
             deathCount+=1;
         }
+        if (maxReDeploy - deathCount<0){
+            //gameFail
+            this.gameFail=true;
+            this.gameSuccess = false;
+            this.gameIsOn = false;
+            this.maxReDeploy = 999;
+            this.endTime = System.currentTimeMillis();
+        }
+    }
+
+    public void onPlayerTemporaryLeave(Player player){
+
     }
 
     // No wander before game start
@@ -49,8 +62,14 @@ public class GameCtrl implements Listener {
                 }
             } else if (gameSuccess&&(!gameFail)) {
                 //gameSuccess
+                if ((e.getTo().getWorld()!=plugin.location.getLobbySpawnPoint().getWorld())){
+                    e.setTo(plugin.location.getLobbySpawnPoint());
+                }
             } else if ((!gameSuccess)&& gameFail) {
                 //gameFail
+                if ((e.getTo().getWorld()!=plugin.location.getLobbySpawnPoint().getWorld())){
+                    e.setTo(plugin.location.getLobbySpawnPoint());
+                }
             } else{
                 //Error
             }
@@ -66,6 +85,10 @@ public class GameCtrl implements Listener {
                 gameIsOn = false;
                 gameSuccess = true;
                 gameFail = false;
+                for (Player player:getServer().getOnlinePlayers()){
+                    player.setGameMode(GameMode.ADVENTURE);
+                    player.teleport(plugin.location.getLobbySpawnPoint());
+                }
 
             }
         }
@@ -79,6 +102,9 @@ public class GameCtrl implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e){
         if (gameIsOn){
             e.getPlayer().setGameMode(GameMode.SURVIVAL);
+            if (e.getPlayer().getWorld().getName().equals(config.getString("Position.PlayerJoin.world"))){
+                e.getPlayer().teleport(plugin.location.getOverWorldSpawnPoint());
+            }
         }else{
             e.getPlayer().setGameMode(GameMode.ADVENTURE);
             e.getPlayer().teleport(plugin.location.getLobbySpawnPoint());
@@ -110,6 +136,7 @@ public class GameCtrl implements Listener {
             plugin.vote.voteForGameStop(player);
         }else{//game is off
             plugin.service.gameHadStopped(player);
+            this.maxReDeploy = 999;
             return;
         }
     }
@@ -151,6 +178,6 @@ public class GameCtrl implements Listener {
         this.deathCount = 0;
         this.gameSuccess = false;
         this.gameFail = false;
-
+        this.maxReDeploy = 999;
     }
 }

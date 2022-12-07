@@ -33,6 +33,7 @@ public final class ContingencyContract extends JavaPlugin {
         this.stats = new Stats(plugin, config);
         this.vote = new Voter(plugin,config);
         this.location = new WorldLocation(plugin,config);
+        getServer().getPluginManager().registerEvents(new CommonFix(plugin,config),this);
         getServer().getPluginManager().registerEvents(this.ctrl,this);
         //
         this.loadContracts();
@@ -53,8 +54,10 @@ public final class ContingencyContract extends JavaPlugin {
      * Load contracts from config.
      */
     public void loadContracts(){
+        contracts.add(new DeathLimit(config,plugin));
         contracts.add(new Erode(config,plugin));
         contracts.add(new HighValueTarget(config,plugin));
+        contracts.add(new Octane(config,plugin));
         contracts.add(new Stimulation(config,plugin));
         contracts.add(new CreeperFusion(config,plugin));
         contracts.add(new SharpArrow(config,plugin));
@@ -81,6 +84,8 @@ public final class ContingencyContract extends JavaPlugin {
         contracts.add(new ForeverNight(config,plugin));
         contracts.add(new OnFire(config,plugin));
         contracts.add(new WhiteTerror(config,plugin));
+        contracts.add(new NoFish(config,plugin));
+//        contracts.add(new ZombiePiglinAnger(config,plugin));
         getServer().getPluginManager().registerEvents(contracts.get(0),this);
         getServer().getPluginManager().registerEvents(contracts.get(1),this);
         getServer().getPluginManager().registerEvents(contracts.get(2),this);
@@ -109,6 +114,10 @@ public final class ContingencyContract extends JavaPlugin {
         getServer().getPluginManager().registerEvents(contracts.get(25),this);
         getServer().getPluginManager().registerEvents(contracts.get(26),this);
         getServer().getPluginManager().registerEvents(contracts.get(27),this);
+        getServer().getPluginManager().registerEvents(contracts.get(28),this);
+        getServer().getPluginManager().registerEvents(contracts.get(29),this);
+        getServer().getPluginManager().registerEvents(contracts.get(30),this);
+//        getServer().getPluginManager().registerEvents(contracts.get(31),this);
     }
 
 }

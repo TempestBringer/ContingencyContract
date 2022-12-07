@@ -28,10 +28,10 @@ public class WhiteTerror extends Contract implements Listener {
             Ghast ghast = (Ghast)e.getEntity();
             if (ghast.getAttribute(Attribute.GENERIC_MAX_HEALTH)!=null){
                 ghast.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(ghast.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*(1+this.levelColumnZero.get(this.selectedIndex)/100));
-
+                ghast.setHealth(ghast.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
             }
-            if (ghast.getAttribute(Attribute.GENERIC_ATTACK_SPEED)!=null){
-                ghast.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(ghast.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100));
+            if (ghast.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)!=null){
+                ghast.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(ghast.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue()*(1+this.levelColumnOne.get(this.selectedIndex)/100));
             }
 
         }

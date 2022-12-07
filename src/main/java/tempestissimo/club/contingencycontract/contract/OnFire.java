@@ -1,5 +1,6 @@
 package tempestissimo.club.contingencycontract.contract;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.Configuration;
@@ -27,13 +28,22 @@ public class OnFire extends Contract implements Listener {
         Integer radius = this.levelColumnZero.get(this.selectedIndex).intValue();
         ArrayList<Block> nearByBlocks = plugin.worldManage.getNearByBlocks(e.getPlayer(), radius);
         for (Block block:nearByBlocks){
-            if (block.getType().equals(Material.LAVA)||block.getType().equals(Material.FIRE)||block.getType().equals(Material.LAVA_CAULDRON)){
+            if (block.getType().equals(Material.LAVA)||block.getType().equals(Material.FIRE)||block.getType().equals(Material.LAVA_CAULDRON)||block.getType().equals(Material.SOUL_FIRE)){
                 flag = true;
                 break;
             }
         }
         if (flag){
-            e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).setType(Material.FIRE);
+            e.getPlayer().setFireTicks(e.getPlayer().getMaxFireTicks());
+            if(e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).getType().equals(Material.AIR)){
+                e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).setType(Material.FIRE);
+            }else{
+                Location loc = e.getPlayer().getLocation();
+                loc.setY(loc.getY()+1);
+                if (e.getPlayer().getWorld().getBlockAt(loc).getType().equals(Material.AIR)){
+                    e.getPlayer().getWorld().getBlockAt(loc).setType(Material.FIRE);
+                }
+            }
         }
         for (int i=0;i<36;i++){
             if (e.getPlayer().getInventory().getItem(i)!=null && e.getPlayer().getInventory().getItem(i).getType().equals(Material.LAVA_BUCKET)){
@@ -42,7 +52,16 @@ public class OnFire extends Contract implements Listener {
             }
         }
         if (flag){
-            e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).setType(Material.FIRE);
+            e.getPlayer().setFireTicks(e.getPlayer().getMaxFireTicks());
+            if(e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).getType().equals(Material.AIR)){
+                e.getPlayer().getWorld().getBlockAt(e.getPlayer().getLocation()).setType(Material.FIRE);
+            }else{
+                Location loc = e.getPlayer().getLocation();
+                loc.setY(loc.getY()+1);
+                if (e.getPlayer().getWorld().getBlockAt(loc).getType().equals(Material.AIR)){
+                    e.getPlayer().getWorld().getBlockAt(loc).setType(Material.FIRE);
+                }
+            }
         }
     }
 

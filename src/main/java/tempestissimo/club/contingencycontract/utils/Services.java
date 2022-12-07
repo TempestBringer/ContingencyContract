@@ -166,7 +166,28 @@ public class Services {
         for (Player player:getServer().getOnlinePlayers()){
             player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
         }
-    }/**
+    }
+
+    public void broadcastPlayerJoinVote(Player joiner,Integer seconds){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        TextComponent playerName = getTextComponent(joiner.getName(), ChatColor.RED);
+        result.add(playerName);
+        TextComponent text = getTextComponent(config.getString("Information.StartPlayerJoinVote.".concat(config.getString("General.Language"))), ChatColor.WHITE);
+        result.add(text);
+        TextComponent  button = getTextComponent("[".concat(config.getString("Information.StartGameResetVoteButton.".concat(config.getString("General.Language")))).concat("]"),ChatColor.GREEN);
+        button.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/cc vote join"));
+        result.add(button);
+        for (Player player:getServer().getOnlinePlayers()){
+            player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+        }
+    }
+
+    public void noVoteForSelf(Player player){
+
+    }
+
+
+    /**
      * 广播：开始进行地图重置投票
      * @param starter
      * @param seconds
@@ -204,7 +225,15 @@ public class Services {
         ArrayList<TextComponent> result = pluginNamePrefix();
         result.add(getTextComponent(config.getString("Information.VoterNotSurvival.".concat(config.getString("General.Language"))),ChatColor.RED));
         player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
-
+    }
+    /**
+     * 私聊：非生存玩家投票
+     * @param player
+     */
+    public void voterNotSurvivalOrAdventure(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.voterNotSurvivalOrAdventure.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
     }
     /**
      * 私聊：非生存玩家创建投票
@@ -213,6 +242,17 @@ public class Services {
     public void voteCreatorNotSurvival(Player player){
         ArrayList<TextComponent> result = pluginNamePrefix();
         result.add(getTextComponent(config.getString("Information.VoteCreatorNotSurvival.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+
+    }
+
+    /**
+     * 私聊：非生存玩家创建投票
+     * @param player
+     */
+    public void voteCreatorNotSurvivalOrAdventure(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.voteCreatorNotSurvivalOrAdventure.".concat(config.getString("General.Language"))),ChatColor.RED));
         player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
 
     }
