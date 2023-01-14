@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.PlayerInventory;
 import tempestissimo.club.contingencycontract.ContingencyContract;
 
 import static org.bukkit.Bukkit.getServer;
@@ -116,7 +117,14 @@ public class GameCtrl implements Listener {
             plugin.service.gameHadStarted(player);
             return;
         }else{//game is off
+            if (this.gameFail==true){
+                plugin.service.noStartAFailedGame(player);
+                return;
+            }
             plugin.service.broadcastGameStart(player);
+            for (Player existPlayer:getServer().getOnlinePlayers()){
+                existPlayer.getInventory().clear();
+            }
             plugin.service.startContracts();
             this.gameIsOn = true;
             startTime = System.currentTimeMillis();

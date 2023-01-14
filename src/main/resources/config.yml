@@ -577,6 +577,9 @@ Information:
   NoVoteForSelf:
     cn_zh: 不可为自己投票
     en: No Self Vote
+  NoStartAFailedGame:
+    cn_zh: 请重置已经失败的游戏
+    en: Please reset a FAILED game
 Position:
   PlayerJoin:
     world: world_lobby

@@ -243,6 +243,16 @@ public class Services {
         ArrayList<TextComponent> result = pluginNamePrefix();
         result.add(getTextComponent(config.getString("Information.VoteCreatorNotSurvival.".concat(config.getString("General.Language"))),ChatColor.RED));
         player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
+    }
+
+    /**
+     * 私聊: 开始了一个已经失败的对局
+     * @param player
+     */
+    public void noStartAFailedGame(Player player){
+        ArrayList<TextComponent> result = pluginNamePrefix();
+        result.add(getTextComponent(config.getString("Information.NoStartAFailedGame.".concat(config.getString("General.Language"))),ChatColor.RED));
+        player.spigot().sendMessage(result.toArray(new TextComponent[result.size()]));
 
     }
 

@@ -61,6 +61,7 @@ public class Voter {
                         for (Player p:getServer().getOnlinePlayers()){
                             p.setGameMode(GameMode.ADVENTURE);
                         }
+                        plugin.ctrl.gameFail = true;
                     }else{
                         // notOK
                         plugin.service.voteNotEnough();
